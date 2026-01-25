@@ -19,8 +19,8 @@ jobs:
               run: |
                   set -e
 
-                  REPO_DIR=/home/deployuser/example/example-service
-                  GIT_REPO=git@github.com:Grootishka/example-service.git
+                  REPO_DIR=/home/deployuser/castaccord/Castaccord-Service-NextJS
+                  GIT_REPO=git@github.com:Grootishka/Castaccord-Service-NextJS.git
 
                   git config --global --add safe.directory "$REPO_DIR"
 

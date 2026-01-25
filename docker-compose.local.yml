@@ -2,13 +2,13 @@ version: "3.7"
 volumes:
   node_modules:
 services:
-  example_service:
-    image: example-service
+  castaccord_service:
+    image: castaccord-service
     build:
       context: ./
       dockerfile: Dockerfile_local
     ports:
-      - "8080:3000"
+      - "3000:3000"
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules

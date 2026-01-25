@@ -1,9 +1,9 @@
 version: "3.7"
 services:
-  example_service:
-    image: example_service
+  castaccord_service:
+    image: castaccord_service
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
-      - 8080:3000
+      - 3000:3000

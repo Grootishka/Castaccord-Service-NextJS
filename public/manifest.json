@@ -1,7 +1,7 @@
 {
-	"name": "Example Service",
-	"short_name": "Example Service",
-	"description": "Example Service",
+	"name": "Castaccord Service",
+	"short_name": "Castaccord",
+	"description": "Castaccord Service for creating and managing stream hub.",
 	"icons": [
 		{ "src": "/icons/icon-72x72.png", "sizes": "72x72", "type": "image/png" },
 		{ "src": "/icons/icon-96x96.png", "sizes": "96x96", "type": "image/png" },

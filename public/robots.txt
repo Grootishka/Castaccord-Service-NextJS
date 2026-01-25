@@ -2,5 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /dashboard
 
-Host: https://example-site.com
-Sitemap: https://example-stie.com/sitemap.xml
+Host: https://castaccord.com
+Sitemap: https://castaccord.com/sitemap.xml

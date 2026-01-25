@@ -1,7 +1,7 @@
 module.exports = {
 	apps: [
 		{
-			name: "Example Service",
+			name: "Castaccord Service",
 			script: "node_modules/next/dist/bin/next",
 			args: "start",
 			cwd: "./",

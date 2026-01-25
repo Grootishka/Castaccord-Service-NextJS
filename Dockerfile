@@ -1,15 +1,22 @@
-FROM node:18.12.0-alpine AS builder
+FROM node:22.14.0 as builder
 
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-COPY package*.json ./
-RUN npm install
+RUN apt-get update -yqq \
+    && apt-get -yqq install nasm
+
+RUN npm install -g pnpm@9.14.4 --silent
 
 COPY . .
 
-RUN npm run build
+RUN pnpm install --silent
 
-FROM node:18.12.0-alpine
+ENV NODE_ENV=production
+
+RUN pnpm run build
+
+FROM node:22.14.0
 
 ENV NODE_ENV=production
 
@@ -18,15 +25,8 @@ WORKDIR /usr/src/app
 COPY --from=builder /usr/src/app/node_modules ./node_modules
 COPY --from=builder /usr/src/app/.next ./.next
 COPY --from=builder /usr/src/app/public ./public
+COPY --from=builder ["/usr/src/app/next.config.js", "/usr/src/app/next-i18next.config.js", "/usr/src/app/ecosystem.config.js", "/usr/src/app/.env.${NODE_ENV}", "/usr/src/app/package.json", "./"]
 
-COPY --from=builder /usr/src/app/next.config.js ./
-COPY --from=builder /usr/src/app/next-i18next.config.js ./
-COPY --from=builder /usr/src/app/ecosystem.config.js ./
-COPY --from=builder /usr/src/app/.env.production ./
-COPY --from=builder /usr/src/app/package.json ./
+RUN pnpm install pm2 -g -q
 
-RUN npm install pm2 -g -q
-
-EXPOSE 3000
-
-CMD ["npm", "run", "start:prod"]
+CMD ["pnpm", "run", "start:prod"]
