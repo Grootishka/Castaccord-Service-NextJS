@@ -1,0 +1,123 @@
+.modal {
+	.modal-dialog {
+		&.warning-comments-modal {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			.modal-content {
+				border: none;
+				border-radius: 24px;
+				background-color: unset;
+				background-clip: unset;
+				width: unset;
+				flex-direction: unset;
+			}
+		}
+	}
+}
+
+.modal-backdrop {
+	&.warning-comments-modal-backdrop {
+		opacity: 1;
+		backdrop-filter: blur(40px);
+		-webkit-backdrop-filter: blur(40px);
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+}
+
+.modal-warning-block {
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	max-width: 405px;
+	padding: 30px 24px;
+	border-radius: 20px;
+	backdrop-filter: blur(30px);
+	box-shadow: 15px 15px 20px 0 rgba(0, 0, 0, 0.3), inset 5px 5px 10px 0 rgba(255, 255, 255, 0.4), inset -10px -10px 15px 0 rgba(0, 0, 0, 0.4);
+	border: solid 2px #b6dbe2;
+	background-color: rgba(0, 0, 0, 0.4);
+	margin-top: 100px;
+
+	@media screen and (width >= 992px) {
+		max-width: 500px;
+		padding: 30px;
+		margin-top: 50px;
+	}
+
+	.modal-warning-title {
+		font-size: 24px;
+		color: #19bff2;
+		font-family: JuraBold, sans-serif;
+		margin-bottom: 16px;
+	}
+
+	.modal-warning-paragraph {
+		font-size: 15px;
+		color: #b6dbe2;
+		margin-bottom: 10px;
+		font-family: JuraSemiBold, sans-serif;
+	}
+
+	.modal-warning-always {
+		font-size: 17px;
+		color: #ff3072;
+		font-weight: bold;
+		margin-top: 15px;
+		margin-bottom: 8px;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		font-family: JuraBold, sans-serif;
+	}
+
+	.modal-warning-list {
+		color: #eaf7fc;
+		font-size: 15px;
+		font-family: JuraRegular, sans-serif;
+		margin-bottom: 15px;
+		padding-left: 22px;
+
+		li {
+			margin-bottom: 3px;
+		}
+	}
+
+	.modal-warning-checkbox-row {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin-bottom: 14px;
+
+		input[type="checkbox"] {
+			accent-color: #19bff2;
+			width: 20px;
+			height: 20px;
+		}
+
+		.check-box-label {
+			color: #b6dbe2;
+			font-size: 14px;
+			font-family: JuraSemiBold, sans-serif;
+			cursor: pointer;
+			user-select: none;
+			margin: 0;
+		}
+	}
+
+	.modal-warning-button {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		cursor: pointer;
+		padding: 10px 0;
+		background: #19bff2;
+		color: #fff;
+		border: none;
+		font-size: 20px;
+		border-radius: 20px;
+		font-family: JuraBold, sans-serif;
+		transition: box-shadow 0.19s;
+		box-shadow: 0 2px 12px #19bff2a3;
+	}
+}

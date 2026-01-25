@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+
+Host: https://example-site.com
+Sitemap: https://example-stie.com/sitemap.xml

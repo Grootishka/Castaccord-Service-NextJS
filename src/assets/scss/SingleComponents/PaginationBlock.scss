@@ -1,0 +1,55 @@
+.pagination {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: calc(100% - 20px);
+
+	.pagination-info {
+		font-family: JuraRegular, sans-serif;
+		font-size: 16px;
+		color: #ffffff;
+		text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+		user-select: none;
+	}
+
+	.pagination-btn {
+		min-width: 90px;
+		padding: 6px 16px;
+		border-radius: 20px;
+		-webkit-backdrop-filter: blur(25px);
+		backdrop-filter: blur(25px);
+		box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.4), inset 5px 5px 8px rgba(255, 255, 255, 0.3), inset -7px -7px 10px rgba(0, 0, 0, 0.4);
+		border: solid 2px #b6dbe2;
+		background-color: rgba(29, 29, 29, 0.7);
+		font-family: JuraBold, sans-serif;
+		font-size: 16px;
+		color: #fff;
+		cursor: pointer;
+		user-select: none;
+		transition: all 0.2s ease;
+		text-align: center;
+
+		&:hover {
+			transform: translateY(-2px);
+			box-shadow: 12px 12px 17px rgba(0, 0, 0, 0.5), inset 4px 4px 6px rgba(255, 255, 255, 0.3), inset -9px -9px 12px rgba(0, 0, 0, 0.5);
+		}
+
+		&:active {
+			transform: translateY(2px);
+			box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4), inset 6px 6px 6px rgba(0, 0, 0, 0.3), inset -5px -5px 10px rgba(0, 0, 0, 0.5);
+		}
+
+		&.disabled {
+			background-color: rgba(80, 80, 80, 0.5);
+			color: rgba(200, 200, 200, 0.6);
+			cursor: not-allowed;
+			pointer-events: none;
+			box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3), inset 5px 5px 8px rgba(0, 0, 0, 0.2), inset -5px -5px 8px rgba(0, 0, 0, 0.3);
+		}
+	}
+}

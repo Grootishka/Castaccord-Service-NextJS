@@ -1,0 +1,39 @@
+name: Deploy Frontend
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    deploy:
+        runs-on: [self-hosted, frontend]
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+              with:
+                  token: ${{ secrets.CI_BOT_TOKEN }}
+
+            - name: Deploy Frontend
+              run: |
+                  set -e
+
+                  REPO_DIR=/home/deployuser/example/example-service
+                  GIT_REPO=git@github.com:Grootishka/example-service.git
+
+                  git config --global --add safe.directory "$REPO_DIR"
+
+                  if [ ! -d "$REPO_DIR" ]; then
+                    git clone $GIT_REPO $REPO_DIR
+                  fi
+
+                  cd $REPO_DIR
+                  git fetch --all
+                  git reset --hard origin/master
+
+                  docker-compose -f docker-compose.prod.yml pull
+                  docker-compose -f docker-compose.prod.yml stop
+                  docker-compose -f docker-compose.prod.yml down
+                  docker-compose -f docker-compose.prod.yml up -d --build
+                  docker system prune -f

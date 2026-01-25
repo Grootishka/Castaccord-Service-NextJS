@@ -1,0 +1,29 @@
+.social-button {
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+	text-align: center;
+	padding: 8px 24px 8px 24px;
+	width: 100%;
+	border-radius: 20px;
+	box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.4), inset 5px 5px 3px 0 rgba(255, 255, 255, 0.3), inset -7px -7px 5px 0 rgba(0, 0, 0, 0.4);
+	border: solid 2px #b6dbe2;
+	background-color: #1d1d1d;
+	color: #e6fbff;
+
+	&:focus {
+		box-shadow: none;
+		outline: none;
+	}
+
+	.login-label {
+		font-family: JuraBold, sans-serif;
+		font-size: 20px;
+	}
+
+	.login-logo {
+		line-height: 0;
+	}
+}
