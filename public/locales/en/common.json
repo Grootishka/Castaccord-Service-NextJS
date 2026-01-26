@@ -1,5 +1,14 @@
 {
-  "content": {
-    "title": "Castaccord"
+  "header": {
+      "title": "Castaccord",
+      "connectTwitch": "Connect Twitch",
+      "importTokens": "Import Tokens",
+      "bots": "Bots",
+      "chat": "Chat",
+      "twitch": "Twitch",
+      "connected": "Connected",
+      "notConnected": "Not Connected",
+      "session": "Session",
+      "login": "Login"
   }
 }
