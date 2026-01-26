@@ -1,4 +1,5 @@
 @import "./vendor/bootstrap.css";
+@import "./colors.scss";
 
 @font-face {
 	font-family: MuseoModernoBold;
@@ -111,7 +112,7 @@ body {
 	font-family: JuraRegular, sans-serif;
 	font-size: 16px;
 	white-space: normal;
-	background: radial-gradient(ellipse at top, #424547 0%, #101114 90%);
+	background: $background-color;
 	overscroll-behavior-y: contain;
 	height: 100%;
 	overflow: auto;

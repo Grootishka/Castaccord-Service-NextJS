@@ -8,6 +8,8 @@ WORKDIR /usr/src/app
 RUN apt-get update -yqq \
     && apt-get -yqq install nasm
 
+RUN npm install -g pnpm@9.14.4 --silent
+
 COPY ./package.json .
 
 RUN pnpm install -q

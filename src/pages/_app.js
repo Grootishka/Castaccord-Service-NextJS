@@ -106,29 +106,29 @@ WebApp.getInitialProps = makeStore.getInitialAppProps((store) => async (context)
 	SSRStoreMain.isMobile = ua.isMobile;
 	SSRStoreMain.isTablet = ua.isTablet;
 
-	try {
-		const accessToken = await getAccessToken(ctx);
-		if (accessToken) {
-			const profileData = await fetchWithToken("/api/user/profile-data", {}, "application/json", ctx);
+	// try {
+	// 	const accessToken = await getAccessToken(ctx);
+	// 	if (accessToken) {
+	// 		const profileData = await fetchWithToken("/api/user/profile-data", {}, "application/json", ctx);
 
-			if (!profileData) {
-				throw new Error("Empty response");
-			} else if (!profileData.success) {
-				throw new Error(profileData?.error || "Unsuccessful response");
-			}
+	// 		if (!profileData) {
+	// 			throw new Error("Empty response");
+	// 		} else if (!profileData.success) {
+	// 			throw new Error(profileData?.error || "Unsuccessful response");
+	// 		}
 
-			if (!profileData.data || !profileData.data.usersID) {
-				throw new Error("Response data not valid");
-			}
+	// 		if (!profileData.data || !profileData.data.usersID) {
+	// 			throw new Error("Response data not valid");
+	// 		}
 
-			SSRStoreMain.isAuth = !!profileData.data.usersID && !profileData.data?.user?.isBanned;
-			SSRStoreMain.isAdmin = profileData.data?.user?.isAdmin;
-			SSRStoreMain.isActive = !!profileData.data?.user?.isActive;
-			SSRStoreMain.user = profileData.data?.user || {};
-		}
-	} catch (e) {
-		console.error(e);
-	}
+	// 		SSRStoreMain.isAuth = !!profileData.data.usersID && !profileData.data?.user?.isBanned;
+	// 		SSRStoreMain.isAdmin = profileData.data?.user?.isAdmin;
+	// 		SSRStoreMain.isActive = !!profileData.data?.user?.isActive;
+	// 		SSRStoreMain.user = profileData.data?.user || {};
+	// 	}
+	// } catch (e) {
+	// 	console.error(e);
+	// }
 
 	store.dispatch(setSSRStoreMain(SSRStoreMain));
 

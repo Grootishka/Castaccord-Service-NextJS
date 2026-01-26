@@ -1,0 +1,33 @@
+.header-nav-bar {
+    @import "../../colors.scss";
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .header-nav-bar-item {
+        cursor: pointer;
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: background-color 0.2s linear;
+        margin-right: 6px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &:hover {
+            background-color: $button-hover-color;
+
+            .header-nav-bar-item-text {
+                color: $text-white-color;
+            }
+        }
+
+        .header-nav-bar-item-text {
+            font-size: 14px;
+            font-family: JuraSemiBold, sans-serif;
+            color: $text-gray-color;
+        }
+    }
+}
