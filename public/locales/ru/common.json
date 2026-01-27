@@ -5,10 +5,6 @@
       "importTokens": "Импортировать токены",
       "bots": "Боты",
       "chat": "Чат",
-      "twitch": "Twitch",
-      "connected": "Подключено",
-      "notConnected": "Не подключено",
-      "session": "Сессия",
       "login": "Вход"
     }
 }

@@ -5,10 +5,6 @@
       "importTokens": "Імпортувати токену",
       "bots": "Боти",
       "chat": "Чат",
-      "twitch": "Twitch",
-      "connected": "Підключено",
-      "notConnected": "Не підключено",
-      "session": "Сесія",
       "login": "Вхід"
   }
 }

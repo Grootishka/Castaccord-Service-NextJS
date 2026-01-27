@@ -18,7 +18,12 @@ module.exports = withBundleAnalyzer({
 		});
 		return configWebpack;
 	},
-	rewrites: async () => [],
+	rewrites: async () => [
+		{
+			source: "/api/:path*",
+			destination: "http://web:3001/api/:path*",
+		},
+	],
 	env: {
 		apiUrl: process.env.API,
 		baseUrl: process.env.BASE_URL,

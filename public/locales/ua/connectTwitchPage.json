@@ -1,0 +1,19 @@
+{
+    "content": {
+        "title": "Підключити Twitch",
+        "description": "Підключіть ваш Twitch аккаунт для управлення чатом",
+        "twitchAccount": "Twitch аккаунт",
+        "twitchAccountDescription": "Для продовження вам необхідно підключити ваш Twitch аккаунт",
+        "twitchAccountNotConnected": "Не підключено до Twitch",
+        "twitchAccountConnected": "Підключено до Twitch",
+        "emailPlaceholder": "Електронна пошта",
+        "passwordPlaceholder": "Пароль",
+        "buttonText": "Підключити Twitch",
+        "perms": {
+            "title": "Необходимі дозволи",
+            "read": "Читати повідомлення чату",
+            "write": "Відправляти повідомлення в чат",
+            "chat": "Переглядати інформацію про канал"
+        }
+    }
+}

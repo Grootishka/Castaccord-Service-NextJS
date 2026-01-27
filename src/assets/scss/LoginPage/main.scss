@@ -1,0 +1,94 @@
+.main-login-block {
+    @import "../colors.scss";
+    padding: 100px 0 0;
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .login-content-block {
+         width: 100%;
+         max-width: 600px;
+
+        .login-title {
+            text-align: left;
+            text-transform: capitalize;
+            font-size: 30px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: $text-white-color;
+            font-family: JuraBold, sans-serif;
+        }
+    
+        .login-description {
+            text-align: left;
+            font-size: 16px;
+            color: $text-gray-color;
+            font-family: JuraSemiBold, sans-serif;
+            margin-bottom: 24px;
+        }
+    
+        .login-block-content {
+            background-color: $block-background-color;
+            padding: 40px;
+            border-radius: 18px;
+        
+            .login-form {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .input-email,
+            .input-password {
+                width: 100%;
+                text-align: left;
+                padding: 6px 25px 6px 25px;
+                border-radius: 20px;
+                backdrop-filter: blur(30px);
+                box-shadow: inset 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+                border: solid 2px #9eb5b9;
+                background-color: rgba(255, 255, 255, 0.1);
+                margin-bottom: 22px;
+                color: #e6fbff;
+
+                &::placeholder {
+                    color: #e6fbff;
+                }
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            .login-button-default {
+                text-align: center;
+                padding: 7px 0 7px 0;
+                width: 100%;
+                border-radius: 20px;
+                // box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.4), inset 5px 5px 3px 0 rgba(255, 255, 255, 0.3), inset -7px -7px 5px 0 rgba(0, 0, 0, 0.4);
+                border: solid 2px #b6dbe2;
+                background-color: $button-background-color;
+                color: #e6fbff;
+                font-family: JuraBold, sans-serif;
+                font-size: 24px;
+                box-shadow: unset;
+                transition: background-color 0.2s linear;
+
+                &:hover {
+                    background-color: $button-hover-color;
+    
+                    .login-button-text {
+                        color: $text-white-color;
+                    }
+                }
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }
+}
