@@ -109,22 +109,11 @@ WebApp.getInitialProps = makeStore.getInitialAppProps((store) => async (context)
 	try {
 		const accessToken = await getAccessToken(ctx);
 		if (accessToken) {
-			const [profileData, twitchAccount] = await Promise.all([fetchWithToken("/api/v1/users/me", {}, "application/json", ctx), fetchWithToken("/api/v1/twitch_account", {}, "application/json", ctx)]);
+			const [profileData, twitchAccount, botAccounts] = await Promise.all([fetchWithToken("/api/v1/users/me", {}, "application/json", ctx), fetchWithToken("/api/v1/twitch_account", {}, "application/json", ctx), fetchWithToken("/api/v1/bot_accounts", {}, "application/json", ctx), fetchWithToken("/api/v1/bot_accounts", {}, "application/json", ctx)]);
 
-			if (!profileData) {
-				throw new Error("Empty response");
-			}
-
-			if (!profileData.data || !profileData.data.id) {
-				throw new Error("Response data not valid");
-			}
-
-			// TODO: add isBanned and isAdmin and user
-			SSRStoreMain.isAuth = !!profileData.data.id; // && !profileData.data?.user?.isBanned;
-			// SSRStoreMain.isAdmin = profileData.data?.user?.isAdmin;
-			SSRStoreMain.isActive = true; // !!profileData.data?.user?.isActive;
-			// SSRStoreMain.user = profileData.data?.user || {};
+			SSRStoreMain.isAuth = !!profileData.data.id;
 			SSRStoreMain.twitchAccount = twitchAccount.data?.attributes || {};
+			SSRStoreMain.botAccounts = botAccounts.data || [];
 		}
 	} catch (e) {
 		console.error(e);

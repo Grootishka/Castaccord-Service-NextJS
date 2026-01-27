@@ -11,7 +11,7 @@ import "assets/scss/layout/Header/Header.scss";
 
 const Header = ({ isAuth }) => {
 	const dispatch = useDispatch();
-	const { t } = useTranslation("common");
+	const { t, i18n } = useTranslation("common");
 	const header = t("header", { returnObjects: true });
 	const router = useRouter();
 
@@ -30,11 +30,16 @@ const Header = ({ isAuth }) => {
 	}, []);
 
 	const handleLoginClick = () => {
-		router.push("/login");
+		router.push("/login", null, { locale: i18n.language });
 	};
 
 	const handleLogoClick = () => {
-		router.push("/");
+		const isMainPage = router.asPath === "/";
+		if (isMainPage) {
+			return;
+		}
+
+		router.push("/", null, { locale: i18n.language });
 	};
 
 	return (
