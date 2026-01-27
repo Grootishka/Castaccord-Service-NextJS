@@ -29,6 +29,7 @@ const fetchWithToken = async (url, options = {}, contentType = "application/json
 		return null;
 	}
 
+	// TODO move back
 	if (response.status === 403) {
 		response = await makeFetch();
 	}
