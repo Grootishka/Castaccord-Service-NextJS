@@ -10,7 +10,8 @@ const fetchData = (url, options = {}, contentType = "application/json", addition
 		headers["Content-Type"] = contentType;
 	}
 
-	const originUrl = process.env.apiUrl || "";
+	const isServer = typeof window === "undefined";
+	const originUrl = isServer ? process.env.API_INTERNAL || process.env.API : "";
 
 	if (options.body && typeof options.body === "object") {
 		options.body = JSON.stringify(options.body);

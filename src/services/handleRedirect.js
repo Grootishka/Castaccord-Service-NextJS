@@ -1,4 +1,4 @@
-import { BAN_PAGE, DASHBOARD_PAGE, LOGIN_PAGE, REGISTER_PAGE } from "constants/links";
+import { BAN_PAGE, DASHBOARD_PAGE, LOGIN_PAGE } from "constants/links";
 
 const redirectOptions = {
 	onlyAuth: (options) => {
@@ -6,7 +6,7 @@ const redirectOptions = {
 			return BAN_PAGE;
 		}
 
-		return REGISTER_PAGE;
+		return DASHBOARD_PAGE;
 	},
 	onlyAdmin: () => LOGIN_PAGE,
 	onlyNotAuth: (options) => {

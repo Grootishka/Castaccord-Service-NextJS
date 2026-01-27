@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 import "assets/scss/layout/Header/NavBar.scss";
 
@@ -8,6 +9,8 @@ const NavBar = () => {
 	const router = useRouter();
 	const { t } = useTranslation("common");
 	const header = t("header", { returnObjects: true });
+
+	const { twitchAccount } = useSelector((state) => state.main);
 
 	const handleClick = (item) => {
 		switch (item) {
@@ -30,9 +33,11 @@ const NavBar = () => {
 
 	return (
 		<div className="header-nav-bar">
-			<div className="header-nav-bar-item" onClick={() => handleClick(header?.connectTwitch)}>
-				<p className="header-nav-bar-item-text">{header?.connectTwitch || ""}</p>
-			</div>
+			{!twitchAccount && (
+				<div className="header-nav-bar-item" onClick={() => handleClick(header?.connectTwitch)}>
+					<p className="header-nav-bar-item-text">{header?.connectTwitch || ""}</p>
+				</div>
+			)}
 			<div className="header-nav-bar-item" onClick={() => handleClick(header?.importTokens)}>
 				<p className="header-nav-bar-item-text">{header?.importTokens || ""}</p>
 			</div>

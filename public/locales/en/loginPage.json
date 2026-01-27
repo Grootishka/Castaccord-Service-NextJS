@@ -1,0 +1,9 @@
+{
+    "content": {
+        "title": "Login",
+        "description": "Use your email and password to login",
+        "emailPlaceholder": "Email",
+        "passwordPlaceholder": "Password",
+        "buttonText": "Login"
+    }
+}

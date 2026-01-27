@@ -8,7 +8,7 @@ import rootReducer from "redux/reducers";
 const composedMiddlewares = applyMiddleware(thunk);
 
 const storeEnhancers = composeWithDevTools({
-	name: "StreamChatHub-NextJS",
+	name: "Castaccord-NextJS",
 })(composedMiddlewares);
 
 const makeStore = () => createStore(rootReducer, storeEnhancers);

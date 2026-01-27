@@ -12,8 +12,8 @@ services:
       - NODE_ENV=production
     restart: unless-stopped
     networks:
-      - app-network
+      - twitch-network
 
 networks:
-  app-network:
+  twitch-network:
     external: true

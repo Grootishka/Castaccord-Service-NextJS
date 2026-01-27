@@ -12,3 +12,9 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
+    networks:
+      - twitch-network
+
+networks:
+  twitch-network:
+    external: true

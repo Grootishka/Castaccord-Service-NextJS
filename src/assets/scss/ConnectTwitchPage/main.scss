@@ -1,0 +1,119 @@
+.main-connect-twitch-block {
+    @import "../colors.scss";
+    padding: 100px 0 0;
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .connect-twitch-content-block {
+        width: 100%;
+         max-width: 600px;
+
+        .connect-twitch-title {
+            text-align: left;
+            text-transform: capitalize;
+            font-size: 30px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: $text-white-color;
+            font-family: JuraBold, sans-serif;
+        }
+    
+        .connect-twitch-description {
+            text-align: left;
+            font-size: 16px;
+            color: $text-gray-color;
+            font-family: JuraSemiBold, sans-serif;
+            margin-bottom: 24px;
+        }
+    
+        .connect-twitch-block-content {
+            background-color: $block-background-color;
+            padding: 24px;
+            border-radius: 10px;
+
+            .connect-twitch-form-title {
+                text-align: left;
+                font-size: 16px;
+                color: $text-white-color;
+                font-family: JuraSemiBold, sans-serif;
+                margin-bottom: 8px;
+            }
+
+            .connect-twitch-form-description {
+                font-size: 16px;
+                color: $text-gray-color;
+                font-family: JuraSemiBold, sans-serif;
+                margin-bottom: 40px;
+            }
+
+            .connect-twitch-form-not-connected {
+                font-size: 14px;
+                color: $text-red-color;
+                font-family: JuraSemiBold, sans-serif;
+                text-align: center;
+            }
+
+            .connect-twitch-form-connected {
+                font-size: 14px;
+                color: $text-green-color;
+                font-family: JuraSemiBold, sans-serif;
+                text-align: center;
+            }
+
+            .button-block {
+                margin-top: 20px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .connect-twitch-button {
+                    padding: 10px 20px;
+                    text-align: center;
+                    background-color: $button-active-color;
+                    color: $text-white-color;
+                    border-radius: 10px;
+                    transition: background-color 0.2s linear;
+
+                    &:hover {
+                        text-decoration: none;
+                        background-color: $button-hover-color;
+                    }
+                }
+            }
+
+            .connect-twitch-form-perms {
+                margin-top: 40px;
+
+                .connect-twitch-form-perms-title {
+                    text-align: left;
+                    font-size: 16px;
+                    color: $text-white-color;
+                    font-family: JuraSemiBold, sans-serif;
+                    margin-bottom: 8px;
+                }
+                
+                .connect-twitch-form-perms-list {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                .connect-twitch-form-perms-list-item {
+                    margin-bottom: 10px;
+
+                    .connect-twitch-form-perms-list-item-title {
+                        text-align: left;
+                        font-size: 14px;
+                        color: $text-gray-color;
+                        font-family: JuraSemiBold, sans-serif;
+                    }
+                }
+            }
+        }
+    }
+}
