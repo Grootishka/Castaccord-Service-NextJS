@@ -1,0 +1,15 @@
+{
+    "content": {
+        "title": "Import Tokens",
+        "description": "Import bot account tokens to enable chat functionality",
+        "noticationIfNotConnectedTwitch": "You need to connect your Twitch account before importing tokens",
+        "connectTwitch": "Connect Twitch",
+        "botAccountTokensTitle": "Bot Account Tokens",
+        "botAccountTokensDescription": "Paste your bot account tokens below (one per line)",
+        "importTokensButton": "Import / Create Bot Accounts",
+        "tokensCardTitle": "Bot Account Tokens",
+        "tokensCardSubtitle": "Paste your bot account tokens below (one per line)",
+        "buttonText": "Import / Create Bot Accounts",
+        "importingText": "Importing..."
+    }
+}

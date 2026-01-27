@@ -15,7 +15,7 @@ import "assets/scss/ConnectTwitchPage/main.scss";
 const ConnectTwitch = () => {
 	const router = useRouter();
 	const dispatch = useDispatch();
-	const { t } = useTranslation("connectTwitchPage");
+	const { t, i18n } = useTranslation("connectTwitchPage");
 	const connectTwitch = t("content", { returnObjects: true });
 
 	const [isLoading, setIsLoading] = useState(false);
@@ -23,8 +23,13 @@ const ConnectTwitch = () => {
 	const { twitchAccount } = useSelector((state) => state.main);
 
 	const postConnectTwitch = async (twitchCode) => {
+		setIsLoading(true);
 		try {
-			setIsLoading(true);
+			if (!twitchCode) {
+				toast.error("Twitch code is required.");
+				return;
+			}
+
 			const response = await fetchWithToken("/api/v1/twitch_account", {
 				method: "POST",
 				body: { code: twitchCode },
@@ -35,9 +40,9 @@ const ConnectTwitch = () => {
 				return;
 			}
 
-			console.log(response.data);
-
+			toast.success("Twitch connected.");
 			dispatch(setTwitchAccount(response.data.attributes));
+			return router.push("/import-tokens", null, { locale: i18n.language });
 		} catch (err) {
 			console.error(`Error in connect Twitch: ${err}`);
 			toast.error("Something went wrong. Please try again.");
@@ -52,8 +57,6 @@ const ConnectTwitch = () => {
 			postConnectTwitch(query.code);
 		}
 	}, [router]);
-
-	console.log(twitchAccount);
 
 	return (
 		<Container>

@@ -97,4 +97,35 @@ const ConnectTwitchRoute = {
 	},
 };
 
-export default [MainRoute, LoginRoute, ConnectTwitchRoute];
+const ImportTokensRoute = {
+	path: "/import-tokens",
+	accessType: "onlyAuth",
+	helmet: {
+		en: {
+			title: "Import Tokens",
+			description: "Import your tokens to the platform.",
+			keywords: "tokens, import, platform",
+			noIndex: false,
+			noFollow: false,
+			hasQuery: false,
+		},
+		ru: {
+			title: "Импортировать токены",
+			description: "Импортируйте ваши токены в платформу.",
+			keywords: "токены, импортировать, платформа",
+			noIndex: false,
+			noFollow: false,
+			hasQuery: false,
+		},
+		ua: {
+			title: "Імпортувати токену",
+			description: "Імпортуйте ваш токен до платформи.",
+			keywords: "токен, імпортувати, платформа",
+			noIndex: false,
+			noFollow: false,
+			hasQuery: false,
+		},
+	},
+};
+
+export default [MainRoute, LoginRoute, ConnectTwitchRoute, ImportTokensRoute];

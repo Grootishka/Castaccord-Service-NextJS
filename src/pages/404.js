@@ -7,7 +7,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import "assets/scss/SingleComponents/NotFound.scss";
 
 const Page404 = () => {
-	const { t } = useTranslation("notfoundPage");
+	const { t, i18n } = useTranslation("notfoundPage");
 	const router = useRouter();
 
 	return (
@@ -21,7 +21,7 @@ const Page404 = () => {
 						<div
 							className="login-button"
 							onClick={() => {
-								router.push("/login");
+								router.push("/login", null, { locale: i18n.language });
 							}}
 						>
 							{t("loginPage")}

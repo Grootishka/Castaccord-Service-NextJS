@@ -33,9 +33,12 @@ const fetchWithToken = async (url, options = {}, contentType = "application/json
 		response = await makeFetch();
 	}
 
-	const json = await response.json();
-
-	return json;
+	let data = null;
+	const text = await response.text();
+	if (text) {
+		data = JSON.parse(text);
+	}
+	return data;
 };
 
 export default fetchWithToken;

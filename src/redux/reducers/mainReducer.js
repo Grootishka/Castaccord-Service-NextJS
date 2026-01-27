@@ -9,6 +9,7 @@ const initialState = {
 	isAdmin: false,
 	user: null,
 	twitchAccount: null,
+	botAccounts: [],
 };
 
 export default function reducer(state = initialState, actions = {}) {

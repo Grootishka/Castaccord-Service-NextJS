@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Col, Row } from "reactstrap";
+import { useTranslation } from "next-i18next";
 
 import "assets/scss/SingleComponents/NotFound.scss";
 
@@ -12,7 +13,7 @@ class NotFound extends Component {
 
 	render() {
 		const { content, router } = this.props;
-
+		const { i18n } = useTranslation("common");
 		return (
 			<div className="not-found-container container">
 				<Row noGutters>
@@ -24,7 +25,7 @@ class NotFound extends Component {
 							<div
 								className="login-button"
 								onClick={() => {
-									router.push("/login");
+									router.push("/login", null, { locale: i18n.language });
 								}}
 							>
 								{content?.loginPage}
