@@ -2,14 +2,12 @@ import React, { useEffect } from "react";
 import { useRouter, withRouter } from "next/router";
 import { Container } from "reactstrap";
 import { useTranslation } from "next-i18next";
-import { useSelector } from "react-redux";
 import { setCookie } from "cookies-next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import withSSRRedirect from "helpers/withSSRRedirect";
 import getSEOOptions from "services/getSEOOptions";
 
 const Index = () => {
-	const isMobile = useSelector((state) => state.main.isMobile);
 	const router = useRouter();
 	const { t } = useTranslation("homePage");
 	const content = t("content", { returnObjects: true });
