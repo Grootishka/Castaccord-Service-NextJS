@@ -29,21 +29,13 @@ module.exports = withBundleAnalyzer({
 			};
 		}
 
-		// Externalize tmi.js for server-side builds
-		if (options.isServer) {
-			configWebpack.externals = configWebpack.externals || [];
-			configWebpack.externals.push({
-				"tmi.js": "commonjs tmi.js",
-			});
-		}
-
 		return configWebpack;
 	},
 	rewrites: async () => [
-		{
-			source: "/api/:path*",
-			destination: "http://web:3001/api/:path*",
-		},
+		// {
+		// 	source: "/api/:path*",
+		// 	destination: "http://web:3001/api/:path*",
+		// },
 	],
 	env: {
 		apiUrl: process.env.API,
