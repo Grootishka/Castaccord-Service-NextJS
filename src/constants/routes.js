@@ -128,4 +128,35 @@ const ChatRoute = {
 	},
 };
 
-export default [MainRoute, LoginRoute, ImportTokensRoute, ChatRoute];
+const ChatPopoutRoute = {
+	path: "/chat-popout",
+	accessType: "onlyAuth",
+	helmet: {
+		en: {
+			title: "Chat Popout",
+			description: "Chat popout on the platform.",
+			keywords: "chat, popout, platform",
+			noIndex: false,
+			noFollow: false,
+			hasQuery: false,
+		},
+		ru: {
+			title: "Чат в отдельном окне",
+			description: "Чат в отдельном окне на платформе.",
+			keywords: "чат, отдельный окно, платформа",
+			noIndex: false,
+			noFollow: false,
+			hasQuery: false,
+		},
+		ua: {
+			title: "Чат у відокремленому вікні",
+			description: "Чат у відокремленому вікні на платформі.",
+			keywords: "чат, відокремлене вікно, платформа",
+			noIndex: false,
+			noFollow: false,
+			hasQuery: false,
+		},
+	},
+};
+
+export default [MainRoute, LoginRoute, ImportTokensRoute, ChatRoute, ChatPopoutRoute];

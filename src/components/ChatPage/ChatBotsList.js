@@ -5,7 +5,7 @@ import "assets/scss/ChatPage/ChatBotsList.scss";
 
 const ChatBotsList = ({ chat, botsViewModels, botSearchQuery, setBotSearchQuery, onSelectBot, activeBotsCount }) => {
 	const [animatedPlaceholder, setAnimatedPlaceholder] = useState("");
-	const placeholderText = chat?.searchBotsByName || chat?.searchBots || "";
+	const placeholderText = chat?.searchBotsByName || "";
 
 	useEffect(() => {
 		if (!botSearchQuery && placeholderText) {
@@ -51,7 +51,7 @@ const ChatBotsList = ({ chat, botsViewModels, botSearchQuery, setBotSearchQuery,
 			</div>
 
 			<div className="chat-bots-list">
-				{!botsViewModels.length && <p className="chat-bots-empty">{chat?.botsEmpty}</p>}
+				{!botsViewModels.length && <p className="chat-bots-empty">{chat?.botsEmpty || ""}</p>}
 
 				{botsViewModels.map((vm) => (
 					<button key={vm.id} className={["chat-bot-item", vm.isHighlighted ? "chat-bot-item-selected" : "", vm.isDisabled ? "chat-bot-item-disabled" : ""].join(" ")} type="button" onClick={() => onSelectBot(vm.id)} disabled={vm.isDisabled}>
@@ -64,8 +64,8 @@ const ChatBotsList = ({ chat, botsViewModels, botSearchQuery, setBotSearchQuery,
 
 						<div className="chat-bot-right">
 							{!!vm.subtitle && !vm.isCurrentSender && <p className={["chat-bot-badge", `chat-bot-badge-${vm.subtitle}`].join(" ")}>{vm.subtitle}</p>}
-							{vm.isCurrentSender && <p className="chat-bot-picked">{chat?.activeBot}</p>}
-							{vm.isSelectedManual && !vm.isCurrentSender && <p className="chat-bot-picked">{chat?.picked}</p>}
+							{vm.isCurrentSender && <p className="chat-bot-picked">{chat?.activeBot || ""}</p>}
+							{vm.isSelectedManual && !vm.isCurrentSender && <p className="chat-bot-picked">{chat?.picked || ""}</p>}
 						</div>
 					</button>
 				))}

@@ -1,7 +1,7 @@
 @import "../colors.scss";
 
 .chat-composer-block {
-	padding: 14px;
+	padding: 5px 14px;
 	display: flex;
 	flex-direction: column;
 
@@ -9,28 +9,35 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		margin-bottom: 10px;
+		margin-bottom: 8px;
 
-		.chat-composer-bot {
-			.chat-composer-bot-label {
-				font-size: 12px;
-				color: $text-gray-color;
-				font-family: JuraSemiBold, sans-serif;
-				margin: 0 0 2px;
-			}
+		.chat-composer-left {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			flex-wrap: wrap;
 
-			.chat-composer-bot-value {
-				font-size: 14px;
-				color: $text-white-color;
-				font-family: JuraBold, sans-serif;
-				margin: 0;
+			.chat-composer-bot {
+				.chat-composer-bot-label {
+					font-size: 12px;
+					color: $text-gray-color;
+					font-family: JuraSemiBold, sans-serif;
+					margin: 0 0 2px;
+				}
+
+				.chat-composer-bot-value {
+					font-size: 14px;
+					color: $text-white-color;
+					font-family: JuraBold, sans-serif;
+					margin: 0;
+				}
 			}
 		}
 
-		.chat-composer-actions {
+		.chat-composer-right {
 			display: flex;
 			align-items: center;
-			justify-content: center;
+			gap: 8px;
 
 			.chat-composer-mode {
 				padding: 8px 14px;
@@ -44,12 +51,35 @@
 				font-size: 14px;
 				text-transform: capitalize;
 			}
+
+			.chat-composer-hide-bots-button {
+				padding: 8px 14px;
+				border-radius: 10px;
+				border: 0;
+
+				background-color: $button-active-color;
+				color: $text-white-color;
+
+				font-family: JuraBold, sans-serif;
+				font-size: 14px;
+
+				transition: background-color 0.2s linear;
+
+				&:focus {
+					outline: none;
+				}
+
+				&:hover {
+					background-color: $button-hover-color;
+				}
+			}
 		}
 	}
 
 	.chat-composer-textarea {
 		width: 100%;
-		min-height: 90px;
+		min-height: 70px;
+		max-height: 70px;
 		resize: none;
 
 		padding: 12px 12px;
@@ -77,41 +107,6 @@
 
 		&:disabled {
 			opacity: 0.6;
-		}
-	}
-
-	.chat-composer-bottom {
-		margin-top: 10px;
-		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: flex-end;
-
-		.chat-send-button {
-			padding: 10px 18px;
-
-			background-color: $button-active-color;
-			color: $text-white-color;
-
-			border-radius: 10px;
-			border: 0;
-
-			font-family: JuraBold, sans-serif;
-			font-size: 14px;
-
-			transition: background-color 0.2s linear;
-
-			&:focus {
-				outline: none;
-			}
-
-			&:hover {
-				background-color: $button-hover-color;
-			}
-
-			&:disabled {
-				opacity: 0.6;
-			}
 		}
 	}
 }

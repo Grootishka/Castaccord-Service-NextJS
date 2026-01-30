@@ -1,7 +1,6 @@
 @import "../colors.scss";
 
 .reply-mode-indicator {
-	margin-top: 6px;
 	padding: 4px 8px;
 	border-radius: 6px;
 	background-color: rgba(107, 39, 209, 0.2);
@@ -10,6 +9,7 @@
 	align-items: center;
 	justify-content: space-between;
 	gap: 8px;
+	margin: 0;
 
 	.reply-mode-indicator-text {
 		font-family: JuraSemiBold, sans-serif;

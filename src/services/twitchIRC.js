@@ -5,8 +5,6 @@ function randJustinfan() {
 }
 
 function parsePrivmsg(line) {
-	// Example:
-	// @tags :user!user@user.tmi.twitch.tv PRIVMSG #channel :message text
 	const m = line.match(/^(?:@([^ ]+) )?:(\w+)![^ ]+ PRIVMSG #([^ ]+) :(.*)$/);
 	if (!m) return null;
 
@@ -49,9 +47,7 @@ export default class TwitchIRC {
 			return;
 		}
 
-		// Only run on client side
 		if (typeof window === "undefined") {
-			console.warn("TwitchIRC: Cannot connect on server side");
 			return;
 		}
 
@@ -61,19 +57,13 @@ export default class TwitchIRC {
 			this.ws = new WebSocket(WS_URL);
 
 			this.ws.onopen = () => {
-				console.log(`TwitchIRC: Connected to ${WS_URL}`);
 				this.isConnected = true;
 
-				// Anonymous connection (no token needed)
 				const nick = randJustinfan();
 				this.send("PASS SCHMOOPIIE");
 				this.send(`NICK ${nick}`);
-
-				// Request capabilities for tags and commands
 				this.send("CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership");
-
 				this.send(`JOIN #${this.channel}`);
-				console.log(`TwitchIRC: Joined #${this.channel}`);
 
 				if (this.onConnectCallback) {
 					this.onConnectCallback();
@@ -89,7 +79,6 @@ export default class TwitchIRC {
 					this.buffer = this.buffer.slice(idx + 2);
 
 					if (line.startsWith("PING")) {
-						// MUST reply or Twitch disconnects
 						this.send(line.replace("PING", "PONG"));
 					} else {
 						const msg = parsePrivmsg(line);
@@ -100,7 +89,6 @@ export default class TwitchIRC {
 							const userId = msg.tags["user-id"] || null;
 							const timestamp = msg.tags["tmi-sent-ts"] ? new Date(parseInt(msg.tags["tmi-sent-ts"], 10)) : new Date();
 
-							// Notify all listeners
 							this.messageListeners.forEach((listener) => {
 								listener({
 									username,
@@ -120,7 +108,6 @@ export default class TwitchIRC {
 				}
 			};
 			this.ws.onclose = (event) => {
-				console.log(`TwitchIRC: Disconnected code=${event.code} reason=${event.reason || ""}`);
 				this.isConnected = false;
 				this.ws = null;
 
@@ -128,7 +115,6 @@ export default class TwitchIRC {
 					this.onDisconnectCallback({ code: event.code, reason: event.reason });
 				}
 
-				// Auto-reconnect if not stopped
 				if (!this.stopped) {
 					this.reconnectTimeout = setTimeout(() => {
 						this.connect();

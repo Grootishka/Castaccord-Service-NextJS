@@ -57,7 +57,11 @@
       "userBadge": "User",
       "searchBots": "Search bots...",
       "searchBotsByName": "Search by name...",
-      "botsTitle": "Bots"
+      "botsTitle": "Bots",
+      "openInPopup": "Pop out chat",
+      "chatOpenedInWindow": "Chat is opened in a separate window",
+      "return": "Return",
+      "returnToPage": "Return to page"
     }
   }
   

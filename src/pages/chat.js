@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect, useRef } from "react";
+import React, { useMemo, useState, useEffect, useRef, useCallback } from "react";
 import { toast } from "react-toastify";
 import { withRouter } from "next/router";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -7,11 +7,12 @@ import { useSelector } from "react-redux";
 import withSSRRedirect from "helpers/withSSRRedirect";
 import getSEOOptions from "services/getSEOOptions";
 import fetchWithToken from "services/fetchWithToken";
-import ChatHeader from "components/ChatPage/ChatHeader";
 import ChatFeed from "components/ChatPage/ChatFeed";
 import ChatComposer from "components/ChatPage/ChatComposer";
 import ChatBotsList from "components/ChatPage/ChatBotsList";
 import ChatStream from "components/ChatPage/ChatStream";
+import usePopoutChat from "hooks/usePopoutChat";
+import TwitchIRC from "services/twitchIRC";
 
 import "assets/scss/ChatPage/main.scss";
 
@@ -19,7 +20,7 @@ const Chat = () => {
 	const { t } = useTranslation("chatPage");
 	const chat = t("content", { returnObjects: true });
 
-	const { botAccounts, user } = useSelector((state) => state.main);
+	const { botAccounts } = useSelector((state) => state.main);
 
 	const [isLoading, setIsLoading] = useState(false);
 	const [isBotsCollapsed, setIsBotsCollapsed] = useState(false);
@@ -45,8 +46,8 @@ const Chat = () => {
 	const messagesEndRef = useRef(null);
 	const textareaRef = useRef(null);
 
-	const channelName = user.broadcaster_username;
-	const parentDomain = "castaccord.com";
+	const channelName = "grootishka_";
+	const parentDomain = "localhost";
 
 	const availableBots = useMemo(() => {
 		const list = Array.isArray(botAccounts) ? botAccounts : [];
@@ -71,7 +72,6 @@ const Chat = () => {
 	}, [availableBots]);
 
 	const botUsernames = useMemo(() => new Set(availableBots.map((bot) => bot.username?.toLowerCase()).filter(Boolean)), [availableBots]);
-	const botMessages = useMemo(() => ircMessages.filter((msg) => botUsernames.has(msg.username.toLowerCase())), [ircMessages, botUsernames]);
 
 	const filteredBots = useMemo(() => {
 		if (!botSearchQuery.trim()) return availableBots;
@@ -143,11 +143,19 @@ const Chat = () => {
 		return name;
 	}, [effectiveBot, chat]);
 
-	const hideFeedText = useMemo(() => (isFeedCollapsed ? chat?.showFeed : chat?.hideFeed), [isFeedCollapsed, chat]);
 	const hideBotsText = useMemo(() => (isBotsCollapsed ? chat?.showBots : chat?.hideBots), [isBotsCollapsed, chat]);
-	const sendBtnText = useMemo(() => (isLoading ? chat?.sending : chat?.send), [isLoading, chat]);
 
-	const onToggleFeed = () => setIsFeedCollapsed((v) => !v);
+	const handleRestoreChat = useCallback(() => {
+		setIsFeedCollapsed(false);
+		setTimeout(() => {
+			if (textareaRef.current) {
+				textareaRef.current.focus();
+			}
+		}, 200);
+	}, []);
+
+	const { isPopoutMode, openChatPopup, broadcastChannel } = usePopoutChat(handleRestoreChat);
+
 	const onToggleBots = () => setIsBotsCollapsed((v) => !v);
 
 	const onSelectBot = (botId) => {
@@ -208,11 +216,9 @@ const Chat = () => {
 			setAutoSeed((v) => v + 1);
 
 			requestAnimationFrame(() => {
-				setTimeout(() => {
-					if (textareaRef.current) {
-						textareaRef.current.focus();
-					}
-				}, 50);
+				if (textareaRef.current) {
+					textareaRef.current.focus();
+				}
 			});
 		} catch (e) {
 			console.error("Error sending reply:", e);
@@ -271,7 +277,6 @@ const Chat = () => {
 				return;
 			}
 
-			// Check if we're in reply mode
 			if (replyMode && replyMode.messageId) {
 				await sendReply(replyMode.messageId, replyMode.botId, text);
 				return;
@@ -308,16 +313,13 @@ const Chat = () => {
 			setAutoSeed((v) => v + 1);
 
 			requestAnimationFrame(() => {
-				setTimeout(() => {
-					if (textareaRef.current) {
-						textareaRef.current.focus();
-					}
-				}, 50);
+				if (textareaRef.current) {
+					textareaRef.current.focus();
+				}
 			});
 		} catch (e) {
 			console.error(e);
 			toast.error(chat?.somethingWentWrong || "");
-			// Restore focus even on error
 			setTimeout(() => {
 				if (textareaRef.current) {
 					textareaRef.current.focus();
@@ -359,8 +361,6 @@ const Chat = () => {
 			ircClientRef.current.disconnect();
 		}
 
-		// eslint-disable-next-line global-require
-		const TwitchIRC = require("services/twitchIRC").default;
 		const ircClient = new TwitchIRC(channelName);
 		ircClientRef.current = ircClient;
 
@@ -406,7 +406,7 @@ const Chat = () => {
 				const updated = [...prev, newMessage].slice(-20);
 				if (typeof window !== "undefined") {
 					try {
-						const toSave = updated.slice(-15).map((msg) => ({
+						const toSave = updated.slice(-20).map((msg) => ({
 							...msg,
 							timestamp: msg.timestamp.toISOString(),
 						}));
@@ -415,6 +415,23 @@ const Chat = () => {
 						console.error("Error saving IRC messages to localStorage:", e);
 					}
 				}
+
+				if (broadcastChannel && broadcastChannel.readyState === "open") {
+					try {
+						broadcastChannel.postMessage({
+							type: "chat:new_message",
+							data: {
+								ircMessages: updated.map((msg) => ({
+									...msg,
+									timestamp: msg.timestamp.toISOString(),
+								})),
+							},
+						});
+					} catch (e) {
+						console.error("Error posting message to broadcast channel:", e);
+					}
+				}
+
 				return updated;
 			});
 		});
@@ -467,13 +484,54 @@ const Chat = () => {
 		} else if (type === "twitch" && chatType !== "twitch") {
 			setChatType("twitch");
 		}
+
+		if (broadcastChannel && broadcastChannel.readyState === "open") {
+			try {
+				broadcastChannel.postMessage({
+					type: "chat:state_sync",
+					data: { chatType: type },
+				});
+			} catch (e) {
+				console.error("Error posting message to broadcast channel:", e);
+			}
+		}
 	};
 
 	useEffect(() => {
 		if (chatType === "irc" && messagesEndRef.current) {
 			messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
 		}
-	}, [botMessages, chatType]);
+	}, [ircMessages, chatType]);
+
+	useEffect(() => {
+		if (!broadcastChannel) return;
+
+		const handleMessage = (event) => {
+			const { type, data } = event.data || {};
+
+			if (type === "chat:new_message" && data && data.ircMessages) {
+				const loadedMessages = data.ircMessages.map((msg) => ({
+					...msg,
+					timestamp: new Date(msg.timestamp),
+				}));
+				setIrcMessages(loadedMessages);
+			} else if (type === "chat:state_sync" && data && data.chatType) {
+				setChatType(data.chatType);
+			}
+		};
+
+		broadcastChannel.addEventListener("message", handleMessage);
+
+		return () => {
+			broadcastChannel.removeEventListener("message", handleMessage);
+		};
+	}, [broadcastChannel]);
+
+	useEffect(() => {
+		if (isPopoutMode) {
+			setIsFeedCollapsed(true);
+		}
+	}, [isPopoutMode]);
 
 	useEffect(
 		() => () => {
@@ -485,16 +543,14 @@ const Chat = () => {
 	return (
 		<div className="main-chat-block">
 			<div className="chat-content-block">
-				<ChatHeader chat={chat} onToggleFeed={onToggleFeed} onToggleBots={onToggleBots} hideFeedText={hideFeedText} hideBotsText={hideBotsText} />
-
 				{!availableBots.length && <p className="chat-warning">{chat?.botsNotImported}</p>}
 
 				<div className={layoutClassName}>
-					{!isFeedCollapsed && <ChatFeed chat={chat} chatType={chatType} onChatTypeChange={onChatTypeChange} channelName={channelName} parentDomain={parentDomain} ircMessages={ircMessages} ircConnectionState={ircConnectionState} onMessageClick={handleMessageClick} replyMode={replyMode} messagesEndRef={messagesEndRef} botUsernames={botUsernames} />}
+					{!isFeedCollapsed && <ChatFeed chat={chat} chatType={chatType} onChatTypeChange={onChatTypeChange} channelName={channelName} parentDomain={parentDomain} ircMessages={ircMessages} ircConnectionState={ircConnectionState} onMessageClick={handleMessageClick} replyMode={replyMode} messagesEndRef={messagesEndRef} botUsernames={botUsernames} onOpenPopup={openChatPopup} />}
 
 					<div className="chat-stream-block">
 						<ChatStream channelName={channelName} parentDomain={parentDomain} />
-						<ChatComposer chat={chat} message={message} setMessage={setMessage} onKeyDown={onKeyDown} sendMessage={sendMessage} isSendDisabled={isSendDisabled} sendBtnText={sendBtnText} sendingAsText={sendingAsText} replyMode={replyMode} setReplyMode={setReplyMode} isAutoMode={isAutoMode} textareaRef={textareaRef} />
+						<ChatComposer chat={chat} message={message} setMessage={setMessage} onKeyDown={onKeyDown} sendMessage={sendMessage} isSendDisabled={isSendDisabled} sendingAsText={sendingAsText} replyMode={replyMode} setReplyMode={setReplyMode} isAutoMode={isAutoMode} textareaRef={textareaRef} onToggleBots={onToggleBots} hideBotsText={hideBotsText} />
 					</div>
 
 					{!isBotsCollapsed && <ChatBotsList chat={chat} botsViewModels={botsViewModels} botSearchQuery={botSearchQuery} setBotSearchQuery={setBotSearchQuery} onSelectBot={onSelectBot} activeBotsCount={activeBots.length} />}
