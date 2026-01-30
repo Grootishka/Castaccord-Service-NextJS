@@ -15,32 +15,32 @@ const IRCChat = ({ messages, connectionState, onMessageClick, replyMode, message
 			<div className="irc-chat-messages">
 				{connectionState === "connecting" && (
 					<div className="irc-chat-status">
-						<p>{chat?.ircConnecting}</p>
+						<p>{chat?.ircConnecting || ""}</p>
 					</div>
 				)}
 				{connectionState === "error" && (
 					<div className="irc-chat-status irc-chat-status-error">
-						<p>{chat?.ircError}</p>
+						<p>{chat?.ircError || ""}</p>
 					</div>
 				)}
 				{connectionState === "disconnected" && messages.length === 0 && (
 					<div className="irc-chat-status">
-						<p>{chat?.ircNotConnected}</p>
+						<p>{chat?.ircNotConnected || ""}</p>
 					</div>
 				)}
 				{messages.length === 0 && connectionState === "connected" && (
 					<div className="irc-chat-status">
-						<p>{chat?.noBotMessages}</p>
+						<p>{chat?.noBotMessages || ""}</p>
 					</div>
 				)}
 				{messages.map((msg) => {
 					const isSelected = replyMode && replyMode.messageId === msg.messageId;
 					const msgIsBot = isBot(msg.username);
 					return (
-						<button key={msg.id} type="button" className={["irc-chat-message", isSelected ? "irc-chat-message-selected" : ""].join(" ")} onClick={() => onMessageClick(msg)} title={chat?.clickToReply}>
+						<button key={msg.id} type="button" className={["irc-chat-message", isSelected ? "irc-chat-message-selected" : ""].join(" ")} onClick={() => onMessageClick(msg)} title={chat?.clickToReply || ""}>
 							<div className="irc-chat-message-header">
 								<span className="irc-chat-message-username">{msg.username}</span>
-								{msgIsBot ? <span className="irc-chat-message-badge irc-chat-message-badge-bot">{chat?.botBadge}</span> : <span className="irc-chat-message-badge irc-chat-message-badge-user">{chat?.userBadge}</span>}
+								{msgIsBot ? <span className="irc-chat-message-badge irc-chat-message-badge-bot">{chat?.botBadge || ""}</span> : <span className="irc-chat-message-badge irc-chat-message-badge-user">{chat?.userBadge || ""}</span>}
 								<span className="irc-chat-message-time">{new Date(msg.timestamp).toLocaleTimeString()}</span>
 							</div>
 							<div className="irc-chat-message-text">{msg.message}</div>

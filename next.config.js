@@ -15,26 +15,13 @@ module.exports = withBundleAnalyzer({
 				delete loader.issuer;
 			}
 		});
-
-		// Handle tmi.js and related Node.js modules for client-side only
-		if (!options.isServer) {
-			configWebpack.resolve.fallback = {
-				...configWebpack.resolve.fallback,
-				fs: false,
-				net: false,
-				tls: false,
-				dns: false,
-				child_process: false,
-			};
-		}
-
 		return configWebpack;
 	},
 	rewrites: async () => [
-		// {
-		// 	source: "/api/:path*",
-		// 	destination: "http://web:3001/api/:path*",
-		// },
+		{
+			source: "/api/:path*",
+			destination: "http://web:3001/api/:path*",
+		},
 	],
 	env: {
 		apiUrl: process.env.API,

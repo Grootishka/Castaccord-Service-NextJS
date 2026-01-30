@@ -57,7 +57,10 @@
       "userBadge": "Пользователь",
       "searchBots": "Поиск ботов...",
       "searchBotsByName": "Поиск по имени...",
-      "botsTitle": "Боты"
+      "botsTitle": "Боты",
+      "openInPopup": "Вынести чат",
+      "chatOpenedInWindow": "Чат открыт в отдельном окне",
+      "return": "Вернуть",
+      "returnToPage": "Вернуться на страницу"
     }
   }
-  
