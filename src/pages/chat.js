@@ -46,7 +46,7 @@ const Chat = () => {
 	const textareaRef = useRef(null);
 
 	const channelName = user.broadcaster_username;
-	const parentDomain = "https://castaccord.com";
+	const parentDomain = "castaccord.com";
 
 	const availableBots = useMemo(() => {
 		const list = Array.isArray(botAccounts) ? botAccounts : [];
