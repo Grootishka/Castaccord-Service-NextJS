@@ -4,7 +4,6 @@ WORKDIR /usr/src/app
 
 RUN apt-get update -yqq && apt-get -yqq install nasm
 
-# pnpm в builder
 RUN corepack enable && corepack prepare pnpm@9.14.4 --activate
 
 COPY . .
@@ -18,10 +17,8 @@ FROM node:22.14.0
 ENV NODE_ENV=production
 WORKDIR /usr/src/app
 
-# pnpm в runtime (ОСЬ ЧОГО НЕ ВИСТАЧАЛО)
 RUN corepack enable && corepack prepare pnpm@9.14.4 --activate
 
-# pm2 краще ставити через npm (простіш і стабільніше)
 RUN npm i -g pm2 --silent
 
 COPY --from=builder /usr/src/app/node_modules ./node_modules
