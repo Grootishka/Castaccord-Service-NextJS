@@ -3,7 +3,7 @@ name: Deploy Frontend
 on:
     push:
         branches:
-            - master
+            - main
 
 jobs:
     deploy:
@@ -30,7 +30,7 @@ jobs:
 
                   cd $REPO_DIR
                   git fetch --all
-                  git reset --hard origin/master
+                  git reset --hard origin/main
 
                   docker-compose -f docker-compose.prod.yml pull
                   docker-compose -f docker-compose.prod.yml stop
