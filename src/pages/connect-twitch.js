@@ -58,6 +58,8 @@ const ConnectTwitch = () => {
 		}
 	}, [router]);
 
+	console.log("twitchAccount", twitchAccount);
+
 	return (
 		<Container>
 			<div className="main-connect-twitch-block">
@@ -69,13 +71,13 @@ const ConnectTwitch = () => {
 						<p className="connect-twitch-form-description">{connectTwitch?.twitchAccountDescription || ""}</p>
 						{twitchAccount && <p className="connect-twitch-form-connected">{connectTwitch?.twitchAccountConnected || ""}</p>}
 						{!twitchAccount && <p className="connect-twitch-form-not-connected">{connectTwitch?.twitchAccountNotConnected || ""}</p>}
-						{!twitchAccount && !isLoading && (
-							<div className="button-block">
-								<a className="connect-twitch-button" href={`https://id.twitch.tv/oauth2/authorize?client_id=${process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_TWITCH_REDIRECT_URI}&response_type=code`}>
-									{connectTwitch?.buttonText || ""}
-								</a>
-							</div>
-						)}
+						{/* {!twitchAccount && !isLoading && ( */}
+						<div className="button-block">
+							<a className="connect-twitch-button" href={`https://id.twitch.tv/oauth2/authorize?client_id=${process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_TWITCH_REDIRECT_URI}&response_type=code&scope=user:write:chat`}>
+								{connectTwitch?.buttonText || ""}
+							</a>
+						</div>
+						{/* )} */}
 						<div className="connect-twitch-form-perms">
 							<p className="connect-twitch-form-perms-title">{connectTwitch?.perms?.title || ""}</p>
 							<ul className="connect-twitch-form-perms-list">

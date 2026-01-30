@@ -113,7 +113,7 @@ WebApp.getInitialProps = makeStore.getInitialAppProps((store) => async (context)
 
 			SSRStoreMain.isAuth = !!profileData.data.id;
 			SSRStoreMain.twitchAccount = twitchAccount.data?.attributes || {};
-			SSRStoreMain.botAccounts = botAccounts.data || [];
+			SSRStoreMain.botAccounts = botAccounts.data.filter((bot) => bot.attributes.status === "active") || [];
 		}
 	} catch (e) {
 		console.error(e);
