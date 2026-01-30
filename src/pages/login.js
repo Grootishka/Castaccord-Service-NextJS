@@ -37,7 +37,7 @@ const Login = () => {
 				await setCookie("accessToken", response.token, { expires });
 				setIsAuth(true);
 
-				return router.push("/connect-twitch", null, { locale: i18n.language });
+				return router.push("/import-tokens", null, { locale: i18n.language });
 			}
 
 			toast.error(`Login failed. ${response.error}`);
