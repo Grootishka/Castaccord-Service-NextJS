@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { withRouter } from "next/router";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
-import { useSelector } from "react-redux";
 import withSSRRedirect from "helpers/withSSRRedirect";
 import getSEOOptions from "services/getSEOOptions";
 import fetchWithToken from "services/fetchWithToken";
@@ -14,8 +13,6 @@ import "assets/scss/ImportTokensPage/main.scss";
 const ImportTokens = () => {
 	const { t } = useTranslation("importTokensPage");
 	const importTokens = t("content", { returnObjects: true });
-
-	const { twitchAccount } = useSelector((state) => state.main);
 
 	const [isLoading, setIsLoading] = useState(false);
 	const [tokensText, setTokensText] = useState("");
@@ -75,18 +72,15 @@ const ImportTokens = () => {
 			<div className="main-import-tokens-block">
 				<div className="import-tokens-content-block">
 					<p className="import-tokens-title">{importTokens?.title || ""}</p>
-					{twitchAccount && <p className="import-tokens-description">{importTokens?.description || ""}</p>}
-					{!twitchAccount && <p className="not-connected-twitch">{importTokens?.noticationIfNotConnectedTwitch || ""}</p>}
-					{twitchAccount && (
-						<div className="tokens-card">
-							<p className="tokens-card-title">{importTokens?.tokensCardTitle || ""}</p>
-							<p className="tokens-card-subtitle">{importTokens?.tokensCardSubtitle || ""}</p>
-							<textarea className="tokens-textarea" value={tokensText} onChange={(e) => setTokensText(e.target.value)} placeholder={"abcdef123456...\nghijkl789012...\nmnopqr345678..."} spellCheck={false} />
-							<button className="import-tokens-btn" type="button" onClick={postImportTokens} disabled={isLoading}>
-								<p className="import-tokens-btn-text">{isLoading ? importTokens?.importingText : importTokens?.buttonText}</p>
-							</button>
-						</div>
-					)}
+					<p className="import-tokens-description">{importTokens?.description || ""}</p>
+					<div className="tokens-card">
+						<p className="tokens-card-title">{importTokens?.tokensCardTitle || ""}</p>
+						<p className="tokens-card-subtitle">{importTokens?.tokensCardSubtitle || ""}</p>
+						<textarea className="tokens-textarea" value={tokensText} onChange={(e) => setTokensText(e.target.value)} placeholder={"abcdef123456...\nghijkl789012...\nmnopqr345678..."} spellCheck={false} />
+						<button className="import-tokens-btn" type="button" onClick={postImportTokens} disabled={isLoading}>
+							<p className="import-tokens-btn-text">{isLoading ? importTokens?.importingText : importTokens?.buttonText}</p>
+						</button>
+					</div>
 				</div>
 			</div>
 		</Container>

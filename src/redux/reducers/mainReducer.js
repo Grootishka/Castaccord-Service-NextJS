@@ -8,7 +8,6 @@ const initialState = {
 	isAuth: false,
 	isAdmin: false,
 	user: null,
-	twitchAccount: null,
 	botAccounts: [],
 };
 
@@ -54,11 +53,6 @@ export default function reducer(state = initialState, actions = {}) {
 			return {
 				...state,
 				user: actions.user,
-			};
-		case types.SET_TWITCH_ACCOUNT:
-			return {
-				...state,
-				twitchAccount: actions.twitchAccount,
 			};
 		case types.SET_INITIAL_VALUES:
 			return {

@@ -10,8 +10,6 @@ const NavBar = () => {
 	const { t, i18n } = useTranslation("common");
 	const header = t("header", { returnObjects: true });
 
-	const { twitchAccount } = useSelector((state) => state.main);
-
 	const handleClick = (item) => {
 		switch (item) {
 			case header?.connectTwitch:
@@ -30,21 +28,12 @@ const NavBar = () => {
 
 	return (
 		<div className="header-nav-bar">
-			{!twitchAccount && (
-				<div className="header-nav-bar-item" onClick={() => handleClick(header?.connectTwitch)}>
-					<p className="header-nav-bar-item-text">{header?.connectTwitch || ""}</p>
-				</div>
-			)}
-			{twitchAccount && (
-				<>
-					<div className="header-nav-bar-item" onClick={() => handleClick(header?.importTokens)}>
-						<p className="header-nav-bar-item-text">{header?.importTokens || ""}</p>
-					</div>
-					<div className="header-nav-bar-item" onClick={() => handleClick(header?.chat)}>
-						<p className="header-nav-bar-item-text">{header?.chat || ""}</p>
-					</div>
-				</>
-			)}
+			<div className="header-nav-bar-item" onClick={() => handleClick(header?.importTokens)}>
+				<p className="header-nav-bar-item-text">{header?.importTokens || ""}</p>
+			</div>
+			<div className="header-nav-bar-item" onClick={() => handleClick(header?.chat)}>
+				<p className="header-nav-bar-item-text">{header?.chat || ""}</p>
+			</div>
 		</div>
 	);
 };

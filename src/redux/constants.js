@@ -9,7 +9,6 @@ export const SET_IS_ADMIN = "SET_IS_ADMIN";
 export const SET_IS_ACTIVE = "SET_IS_ACTIVE";
 
 export const SET_USER = "SET_USER";
-export const SET_TWITCH_ACCOUNT = "SET_TWITCH_ACCOUNT";
 export const SET_BALANCE = "SET_BALANCE";
 
 export const SET_INITIAL_VALUES = "SET_INITIAL_VALUES";

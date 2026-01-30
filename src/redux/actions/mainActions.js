@@ -9,11 +9,6 @@ const setIsMobile = (value) => ({
 	isMobile: value,
 });
 
-const setTwitchAccount = (value) => ({
-	type: types.SET_TWITCH_ACCOUNT,
-	twitchAccount: value,
-});
-
 const setIsAdmin = (value) => ({
 	type: types.SET_IS_ADMIN,
 	isAdmin: value,
@@ -35,4 +30,4 @@ const setInitialValues = () => ({
 	type: types.SET_INITIAL_VALUES,
 });
 
-export { setInitialValues, setIsAuth, setIsActive, setIsMobile, setSSRStoreMain, setUser, setTwitchAccount };
+export { setInitialValues, setIsAuth, setIsActive, setIsMobile, setSSRStoreMain, setUser };
