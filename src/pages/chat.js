@@ -20,7 +20,7 @@ const Chat = () => {
 	const { t } = useTranslation("chatPage");
 	const chat = t("content", { returnObjects: true });
 
-	const { botAccounts } = useSelector((state) => state.main);
+	const { botAccounts, user } = useSelector((state) => state.main);
 
 	const [isLoading, setIsLoading] = useState(false);
 	const [isBotsCollapsed, setIsBotsCollapsed] = useState(false);
@@ -46,8 +46,8 @@ const Chat = () => {
 	const messagesEndRef = useRef(null);
 	const textareaRef = useRef(null);
 
-	const channelName = "grootishka_";
-	const parentDomain = "localhost";
+	const channelName = user?.broadcaster_username || "";
+	const parentDomain = "castaccord.com";
 
 	const availableBots = useMemo(() => {
 		const list = Array.isArray(botAccounts) ? botAccounts : [];

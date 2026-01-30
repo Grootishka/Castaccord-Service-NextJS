@@ -29,8 +29,8 @@ const ChatPopout = () => {
 	const messagesEndRef = useRef(null);
 	const broadcastChannelRef = useRef(null);
 
-	const channelName = user?.broadcaster_username || "grootishka_";
-	const parentDomain = typeof window !== "undefined" ? window.location.hostname : "localhost";
+	const channelName = user?.broadcaster_username || "";
+	const parentDomain = "castaccord.com";
 
 	const availableBots = useMemo(() => {
 		const list = Array.isArray(botAccounts) ? botAccounts : [];
