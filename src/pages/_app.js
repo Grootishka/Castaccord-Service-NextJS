@@ -109,10 +109,9 @@ WebApp.getInitialProps = makeStore.getInitialAppProps((store) => async (context)
 	try {
 		const accessToken = await getAccessToken(ctx);
 		if (accessToken) {
-			const [profileData, twitchAccount, botAccounts] = await Promise.all([fetchWithToken("/api/v1/users/me", {}, "application/json", ctx), fetchWithToken("/api/v1/twitch_account", {}, "application/json", ctx), fetchWithToken("/api/v1/bot_accounts", {}, "application/json", ctx), fetchWithToken("/api/v1/bot_accounts", {}, "application/json", ctx)]);
+			const [profileData, botAccounts] = await Promise.all([fetchWithToken("/api/v1/users/me", {}, "application/json", ctx), fetchWithToken("/api/v1/bot_accounts", {}, "application/json", ctx)]);
 
 			SSRStoreMain.isAuth = !!profileData.data.id;
-			SSRStoreMain.twitchAccount = twitchAccount.data?.attributes || {};
 			SSRStoreMain.botAccounts = botAccounts.data.filter((bot) => bot.attributes.status === "active") || [];
 		}
 	} catch (e) {
