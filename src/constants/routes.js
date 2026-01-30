@@ -66,37 +66,6 @@ const LoginRoute = {
 	},
 };
 
-const ConnectTwitchRoute = {
-	path: "/connect-twitch",
-	accessType: "none",
-	helmet: {
-		ua: {
-			title: "Підключити Twitch",
-			description: "Підключіть ваш Twitch аккаунт до платформи.",
-			keywords: "twitch, підключити, аккаунт, платформа",
-			noIndex: false,
-			noFollow: false,
-			hasQuery: false,
-		},
-		en: {
-			title: "Connect Twitch",
-			description: "Connect your Twitch account to the platform.",
-			keywords: "twitch, connect, account, platform",
-			noIndex: false,
-			noFollow: false,
-			hasQuery: false,
-		},
-		ru: {
-			title: "Подключить Twitch",
-			description: "Подключите ваш Twitch аккаунт к платформе.",
-			keywords: "twitch, подключить, аккаунт, платформа",
-			noIndex: false,
-			noFollow: false,
-			hasQuery: false,
-		},
-	},
-};
-
 const ImportTokensRoute = {
 	path: "/import-tokens",
 	accessType: "onlyAuth",
@@ -159,4 +128,4 @@ const ChatRoute = {
 	},
 };
 
-export default [MainRoute, LoginRoute, ConnectTwitchRoute, ImportTokensRoute, ChatRoute];
+export default [MainRoute, LoginRoute, ImportTokensRoute, ChatRoute];
