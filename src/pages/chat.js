@@ -168,7 +168,10 @@ const Chat = () => {
 
 			const text = (replyMessage || "").trim();
 			if (!text) {
-				toast.error(chat?.emptyMessage);
+				if (!isAutoMode) {
+					setSelectedBotId(null);
+				}
+				setAutoSeed((v) => v + 1);
 				return;
 			}
 
@@ -242,7 +245,10 @@ const Chat = () => {
 
 			const text = (message || "").trim();
 			if (!text) {
-				toast.error(chat?.emptyMessage);
+				if (!isAutoMode) {
+					setSelectedBotId(null);
+				}
+				setAutoSeed((v) => v + 1);
 				requestAnimationFrame(() => {
 					setTimeout(() => {
 						if (textareaRef.current) {
