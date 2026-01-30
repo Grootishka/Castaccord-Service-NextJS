@@ -16,6 +16,27 @@ module.exports = withBundleAnalyzer({
 				delete loader.issuer;
 			}
 		});
+
+		// Handle tmi.js and related Node.js modules for client-side only
+		if (!options.isServer) {
+			configWebpack.resolve.fallback = {
+				...configWebpack.resolve.fallback,
+				fs: false,
+				net: false,
+				tls: false,
+				dns: false,
+				child_process: false,
+			};
+		}
+
+		// Externalize tmi.js for server-side builds
+		if (options.isServer) {
+			configWebpack.externals = configWebpack.externals || [];
+			configWebpack.externals.push({
+				"tmi.js": "commonjs tmi.js",
+			});
+		}
+
 		return configWebpack;
 	},
 	rewrites: async () => [

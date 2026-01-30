@@ -66,37 +66,6 @@ const LoginRoute = {
 	},
 };
 
-const ConnectTwitchRoute = {
-	path: "/connect-twitch",
-	accessType: "onlyAuth",
-	helmet: {
-		ua: {
-			title: "Підключити Twitch",
-			description: "Підключіть ваш Twitch аккаунт до платформи.",
-			keywords: "twitch, підключити, аккаунт, платформа",
-			noIndex: false,
-			noFollow: false,
-			hasQuery: false,
-		},
-		en: {
-			title: "Connect Twitch",
-			description: "Connect your Twitch account to the platform.",
-			keywords: "twitch, connect, account, platform",
-			noIndex: false,
-			noFollow: false,
-			hasQuery: false,
-		},
-		ru: {
-			title: "Подключить Twitch",
-			description: "Подключите ваш Twitch аккаунт к платформе.",
-			keywords: "twitch, подключить, аккаунт, платформа",
-			noIndex: false,
-			noFollow: false,
-			hasQuery: false,
-		},
-	},
-};
-
 const ImportTokensRoute = {
 	path: "/import-tokens",
 	accessType: "onlyAuth",
@@ -128,4 +97,35 @@ const ImportTokensRoute = {
 	},
 };
 
-export default [MainRoute, LoginRoute, ConnectTwitchRoute, ImportTokensRoute];
+const ChatRoute = {
+	path: "/chat",
+	accessType: "onlyAuth",
+	helmet: {
+		en: {
+			title: "Chat",
+			description: "Chat on the platform.",
+			keywords: "chat, platform",
+			noIndex: false,
+			noFollow: false,
+			hasQuery: false,
+		},
+		ru: {
+			title: "Чат",
+			description: "Чат на платформе.",
+			keywords: "чат, платформа",
+			noIndex: false,
+			noFollow: false,
+			hasQuery: false,
+		},
+		ua: {
+			title: "Чат",
+			description: "Чат на платформі.",
+			keywords: "чат, платформа",
+			noIndex: false,
+			noFollow: false,
+			hasQuery: false,
+		},
+	},
+};
+
+export default [MainRoute, LoginRoute, ImportTokensRoute, ChatRoute];

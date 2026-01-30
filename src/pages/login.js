@@ -62,8 +62,6 @@ const Login = () => {
 							</button>
 						</form>
 					</div>
-					{/* <iframe src="https://www.twitch.tv/embed/zikint/chat?parent=localhost" height="500" width="100%"></iframe> */}
-					{/* <iframe src="https://player.twitch.tv/?channel=zikint&parent=localhost" height="50" width="50" allowfullscreen="true"></iframe> */}
 				</div>
 			</div>
 		</Container>
