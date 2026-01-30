@@ -113,6 +113,7 @@ WebApp.getInitialProps = makeStore.getInitialAppProps((store) => async (context)
 
 			SSRStoreMain.isAuth = !!profileData.data.id;
 			SSRStoreMain.botAccounts = botAccounts.data.filter((bot) => bot.attributes.status === "active") || [];
+			SSRStoreMain.user = profileData.data?.attributes || {};
 		}
 	} catch (e) {
 		console.error(e);
