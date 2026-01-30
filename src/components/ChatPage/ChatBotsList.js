@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import "assets/scss/ChatPage/ChatBotsList.scss";
 
-const ChatBotsList = ({ chat, botsViewModels, botSearchQuery, setBotSearchQuery, onSelectBot }) => {
+const ChatBotsList = ({ chat, botsViewModels, botSearchQuery, setBotSearchQuery, onSelectBot, activeBotsCount }) => {
 	const [animatedPlaceholder, setAnimatedPlaceholder] = useState("");
 	const placeholderText = chat?.searchBotsByName || chat?.searchBots || "";
 
@@ -40,7 +40,10 @@ const ChatBotsList = ({ chat, botsViewModels, botSearchQuery, setBotSearchQuery,
 	return (
 		<div className="chat-bots-block">
 			<div className="chat-panel-header">
-				<p className="chat-panel-title">{chat?.botsTitle || ""}</p>
+				<div className="chat-panel-title-wrapper">
+					<p className="chat-panel-title">{chat?.botsTitle || ""}</p>
+					{activeBotsCount > 0 && <span className="chat-panel-title-count">({activeBotsCount})</span>}
+				</div>
 			</div>
 
 			<div className="chat-bots-search">
@@ -88,6 +91,7 @@ ChatBotsList.propTypes = {
 	botSearchQuery: PropTypes.string.isRequired,
 	setBotSearchQuery: PropTypes.func.isRequired,
 	onSelectBot: PropTypes.func.isRequired,
+	activeBotsCount: PropTypes.number.isRequired,
 };
 
 export default ChatBotsList;

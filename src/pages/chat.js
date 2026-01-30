@@ -491,7 +491,7 @@ const Chat = () => {
 						<ChatComposer chat={chat} message={message} setMessage={setMessage} onKeyDown={onKeyDown} sendMessage={sendMessage} isSendDisabled={isSendDisabled} sendBtnText={sendBtnText} sendingAsText={sendingAsText} replyMode={replyMode} setReplyMode={setReplyMode} isAutoMode={isAutoMode} textareaRef={textareaRef} />
 					</div>
 
-					{!isBotsCollapsed && <ChatBotsList chat={chat} botsViewModels={botsViewModels} botSearchQuery={botSearchQuery} setBotSearchQuery={setBotSearchQuery} onSelectBot={onSelectBot} />}
+					{!isBotsCollapsed && <ChatBotsList chat={chat} botsViewModels={botsViewModels} botSearchQuery={botSearchQuery} setBotSearchQuery={setBotSearchQuery} onSelectBot={onSelectBot} activeBotsCount={activeBots.length} />}
 				</div>
 			</div>
 		</div>
