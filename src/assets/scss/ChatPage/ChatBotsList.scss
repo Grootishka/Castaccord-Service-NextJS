@@ -19,11 +19,23 @@
 
 		border-bottom: 1px solid $border-color;
 
+		.chat-panel-title-wrapper {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
 		.chat-panel-title {
 			font-size: 16px;
 			color: $text-white-color;
 			font-family: JuraSemiBold, sans-serif;
 			margin: 0;
+		}
+
+		.chat-panel-title-count {
+			font-size: 14px;
+			color: $text-gray-color;
+			font-family: JuraSemiBold, sans-serif;
 		}
 	}
 
