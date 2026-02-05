@@ -1,10 +1,10 @@
 {
     "content": {
-        "title": "Імпорт токенів",
+        "title": "Імпортувати токени",
         "description": "Імпортуйте токени ботів для включення функціоналу чату",
         "noticationIfNotConnectedTwitch": "Для імпорту токенів вам необхідно підключити ваш Twitch акаунт",
         "connectTwitch": "Підключити Twitch",
-        "botAccountTokensTitle": "Токенів ботів",
+        "botAccountTokensTitle": "Токени ботів",
         "botAccountTokensDescription": "Вставте токени ваших ботів нижче (один токен на рядок)",
         "importTokensButton": "Імпортувати / Створити ботів",
         "tokensCardTitle": "Токени ботів",

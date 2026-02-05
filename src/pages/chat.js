@@ -30,17 +30,18 @@ const Chat = () => {
 	const [message, setMessage] = useState("");
 
 	const [selectedBotId, setSelectedBotId] = useState(null);
-	const isAutoMode = selectedBotId === null;
+	const [previewBotId, setPreviewBotId] = useState(null);
+	const lastUsedBotIdRef = useRef(null);
 
-	const [autoSeed, setAutoSeed] = useState(1);
+	const isAutoMode = useMemo(() => selectedBotId === null, [selectedBotId]);
 
 	const [chatType, setChatType] = useState("twitch");
 	const [replyMode, setReplyMode] = useState(null);
 	const messagesEndRef = useRef(null);
 	const textareaRef = useRef(null);
 
-	const channelName = "grootishka_"; // user?.broadcaster_username || "";
-	const parentDomain = "localhost"; // "castaccord.com";
+	const channelName = user?.broadcaster_username;
+	const parentDomain = "castaccord.com";
 
 	const availableBots = useMemo(() => {
 		const list = Array.isArray(botAccounts) ? botAccounts : [];
@@ -76,15 +77,31 @@ const Chat = () => {
 		});
 	}, [availableBots, botSearchQuery]);
 
-	const pickDeterministicBotId = (bots, seed) => {
-		if (!bots.length) return null;
-		const idx = Math.abs((seed * 9301 + 49297) % 233280) % bots.length;
-		return bots[idx].id;
-	};
+	const nextRandomBotId = useCallback(() => {
+		const botsToPickFrom = activeBots.length > 0 ? activeBots : availableBots;
+		if (!botsToPickFrom.length) return null;
 
-	const autoBotId = useMemo(() => pickDeterministicBotId(activeBots, autoSeed), [activeBots, autoSeed]);
+		if (botsToPickFrom.length === 1) {
+			return botsToPickFrom[0].id;
+		}
 
-	const effectiveBotId = useMemo(() => (isAutoMode ? autoBotId : selectedBotId), [isAutoMode, autoBotId, selectedBotId]);
+		const candidates = botsToPickFrom.filter((bot) => bot.id !== lastUsedBotIdRef.current);
+		const pool = candidates.length > 0 ? candidates : botsToPickFrom;
+
+		const randomIndex = Math.floor(Math.random() * pool.length);
+		const selectedId = pool[randomIndex].id;
+
+		lastUsedBotIdRef.current = selectedId;
+
+		return selectedId;
+	}, [activeBots, availableBots]);
+
+	const previewBot = useMemo(() => {
+		if (!previewBotId) return null;
+		return availableBots.find((b) => b.id === previewBotId) || null;
+	}, [availableBots, previewBotId]);
+
+	const effectiveBotId = useMemo(() => (isAutoMode ? previewBotId : selectedBotId), [isAutoMode, previewBotId, selectedBotId]);
 
 	const effectiveBot = useMemo(() => {
 		if (!effectiveBotId) return null;
@@ -133,12 +150,13 @@ const Chat = () => {
 	}, [isFeedCollapsed, isBotsCollapsed]);
 
 	const sendingAsText = useMemo(() => {
-		if (!effectiveBot) {
+		const botToShow = isAutoMode ? previewBot : effectiveBot;
+		if (!botToShow) {
 			return chat?.noBotSelected || "";
 		}
-		const name = effectiveBot.username || t("content.botFallbackName", { id: effectiveBot.id });
+		const name = botToShow.username || t("content.botFallbackName", { id: botToShow.id });
 		return name;
-	}, [effectiveBot, chat]);
+	}, [isAutoMode, previewBot, effectiveBot, chat, t]);
 
 	const hideBotsText = useMemo(() => {
 		if (isBotsCollapsed) {
@@ -180,23 +198,29 @@ const Chat = () => {
 	};
 
 	const sendReply = async (messageId, botId, replyMessage) => {
+		if (isLoading) return;
+
 		try {
 			if (!messageId) {
 				toast.error(chat?.noMessageId);
 				return;
 			}
 
-			if (!botId) {
-				toast.error(chat?.noBotSelected);
+			const text = (replyMessage || "").trim();
+			if (!text) {
+				const newBotId = nextRandomBotId();
+				if (newBotId) {
+					setPreviewBotId(newBotId);
+				}
+				setSelectedBotId(null);
+				focusTextArea();
 				return;
 			}
 
-			const text = (replyMessage || "").trim();
-			if (!text) {
-				if (!isAutoMode) {
-					setSelectedBotId(null);
-				}
-				setAutoSeed((v) => v + 1);
+			const botIdToUse = nextRandomBotId();
+			if (!botIdToUse) {
+				toast.error(chat?.noBotSelected);
+				focusTextArea();
 				return;
 			}
 
@@ -205,36 +229,41 @@ const Chat = () => {
 			const response = await fetchWithToken("/api/v1/messages/reply", {
 				method: "POST",
 				body: {
-					bot_account_id: String(botId),
+					bot_account_id: String(botIdToUse),
 					message: text,
 					broadcaster_username: channelName,
 					reply_to_message_id: messageId,
 				},
 			});
 
-			if (response && response.success === false) {
-				toast.error(response.error || chat?.replyFailed);
-				requestAnimationFrame(() => {
-					setTimeout(() => {
-						if (textareaRef.current) {
-							textareaRef.current.focus();
-						}
-					}, 10);
-				});
-				return;
-			}
-
 			setReplyMode(null);
 			setMessage("");
 
-			if (!isAutoMode) {
+			if (response && response.success === false) {
+				toast.error(response.error || chat?.replyFailed);
+				const newBotId = nextRandomBotId();
+				if (newBotId) {
+					setPreviewBotId(newBotId);
+				}
 				setSelectedBotId(null);
+				focusTextArea();
+				return;
 			}
-			setAutoSeed((v) => v + 1);
+
+			const newBotId = nextRandomBotId();
+			if (newBotId) {
+				setPreviewBotId(newBotId);
+			}
+			setSelectedBotId(null);
 
 			focusTextArea();
 		} catch (e) {
 			console.error("Error sending reply:", e);
+			const newBotId = nextRandomBotId();
+			if (newBotId) {
+				setPreviewBotId(newBotId);
+			}
+			setSelectedBotId(null);
 			focusTextArea();
 		} finally {
 			setIsLoading(false);
@@ -242,6 +271,8 @@ const Chat = () => {
 	};
 
 	const sendMessage = async () => {
+		if (isLoading) return;
+
 		try {
 			if (!availableBots.length) {
 				toast.error(chat?.botsNotImported);
@@ -251,16 +282,11 @@ const Chat = () => {
 
 			const text = (message || "").trim();
 			if (!text) {
-				if (!isAutoMode) {
-					setSelectedBotId(null);
+				const newBotId = nextRandomBotId();
+				if (newBotId) {
+					setPreviewBotId(newBotId);
 				}
-				setAutoSeed((v) => v + 1);
-				focusTextArea();
-				return;
-			}
-
-			if (!effectiveBotId) {
-				toast.error(chat?.noBotSelected);
+				setSelectedBotId(null);
 				focusTextArea();
 				return;
 			}
@@ -270,33 +296,51 @@ const Chat = () => {
 				return;
 			}
 
+			const botIdToUse = nextRandomBotId();
+			if (!botIdToUse) {
+				toast.error(chat?.noBotSelected);
+				focusTextArea();
+				return;
+			}
+
 			setIsLoading(true);
 
 			const response = await fetchWithToken("/api/v1/messages", {
 				method: "POST",
 				body: {
-					bot_account_id: effectiveBotId,
+					bot_account_id: botIdToUse,
 					broadcaster_username: channelName,
 					message: text,
 				},
 			});
 
+			setMessage("");
+
 			if (response && response.success === false) {
 				toast.error(response.error || chat?.sendFailed);
+				const newBotId = nextRandomBotId();
+				if (newBotId) {
+					setPreviewBotId(newBotId);
+				}
+				setSelectedBotId(null);
 				focusTextArea();
 				return;
 			}
 
-			setMessage("");
-
-			if (!isAutoMode) {
-				setSelectedBotId(null);
+			const newBotId = nextRandomBotId();
+			if (newBotId) {
+				setPreviewBotId(newBotId);
 			}
-			setAutoSeed((v) => v + 1);
+			setSelectedBotId(null);
 
 			focusTextArea();
 		} catch (e) {
 			console.error("Error sending message:", e);
+			const newBotId = nextRandomBotId();
+			if (newBotId) {
+				setPreviewBotId(newBotId);
+			}
+			setSelectedBotId(null);
 			focusTextArea();
 		} finally {
 			setIsLoading(false);
@@ -316,6 +360,8 @@ const Chat = () => {
 	};
 
 	const sendPreparedMessage = async (text) => {
+		if (isLoading) return;
+
 		const preparedText = (text || "").trim();
 		if (!preparedText) {
 			return;
@@ -328,7 +374,8 @@ const Chat = () => {
 				return;
 			}
 
-			if (!effectiveBotId) {
+			const botIdToUse = nextRandomBotId();
+			if (!botIdToUse) {
 				toast.error(chat?.noBotSelected);
 				focusTextArea();
 				return;
@@ -339,7 +386,7 @@ const Chat = () => {
 			const response = await fetchWithToken("/api/v1/messages", {
 				method: "POST",
 				body: {
-					bot_account_id: effectiveBotId,
+					bot_account_id: botIdToUse,
 					broadcaster_username: channelName,
 					message: preparedText,
 				},
@@ -347,18 +394,29 @@ const Chat = () => {
 
 			if (response && response.success === false) {
 				toast.error(response.error || chat?.sendFailed);
+				const newBotId = nextRandomBotId();
+				if (newBotId) {
+					setPreviewBotId(newBotId);
+				}
+				setSelectedBotId(null);
 				focusTextArea();
 				return;
 			}
 
-			if (!isAutoMode) {
-				setSelectedBotId(null);
+			const newBotId = nextRandomBotId();
+			if (newBotId) {
+				setPreviewBotId(newBotId);
 			}
-			setAutoSeed((v) => v + 1);
+			setSelectedBotId(null);
 
 			focusTextArea();
 		} catch (e) {
 			console.error("Error sending prepared message:", e);
+			const newBotId = nextRandomBotId();
+			if (newBotId) {
+				setPreviewBotId(newBotId);
+			}
+			setSelectedBotId(null);
 			focusTextArea();
 		} finally {
 			setIsLoading(false);
@@ -437,6 +495,23 @@ const Chat = () => {
 			setIsFeedCollapsed(true);
 		}
 	}, [isPopoutMode]);
+
+	useEffect(() => {
+		const botsToPickFrom = activeBots.length > 0 ? activeBots : availableBots;
+		if (botsToPickFrom.length > 0 && !previewBotId) {
+			const initialBotId = nextRandomBotId();
+			if (initialBotId) {
+				setPreviewBotId(initialBotId);
+			}
+		} else if (botsToPickFrom.length === 0) {
+			setPreviewBotId(null);
+		} else if (previewBotId && !botsToPickFrom.find((b) => b.id === previewBotId)) {
+			const newBotId = nextRandomBotId();
+			if (newBotId) {
+				setPreviewBotId(newBotId);
+			}
+		}
+	}, [activeBots, availableBots, previewBotId, nextRandomBotId]);
 
 	return (
 		<div className="main-chat-block">

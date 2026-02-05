@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { toast } from "react-toastify";
 import TwitchIRC from "services/twitchIRC";
 
-const STORAGE_KEY = "irc_messages";
+const STORAGE_KEY_PREFIX = "irc_messages_";
 const MAX_MESSAGES = 20;
 
 const useIRC = (channelName, options = {}) => {
@@ -11,13 +11,23 @@ const useIRC = (channelName, options = {}) => {
 	const [ircConnectionState, setIrcConnectionState] = useState("disconnected");
 	const ircClientRef = useRef(null);
 	const broadcastChannelRef = useRef(options.broadcastChannel || null);
+	const channelNameRef = useRef(channelName);
 
-	// Load messages from localStorage on mount
+	useEffect(() => {
+		channelNameRef.current = channelName;
+	}, [channelName]);
+
+	const getStorageKey = useCallback(() => {
+		if (!channelNameRef.current) return `${STORAGE_KEY_PREFIX}default`;
+		return `${STORAGE_KEY_PREFIX}${channelNameRef.current.toLowerCase().replace("#", "")}`;
+	}, []);
+
 	useEffect(() => {
 		if (typeof window === "undefined") return;
 
 		try {
-			const saved = localStorage.getItem(STORAGE_KEY);
+			const storageKey = getStorageKey();
+			const saved = localStorage.getItem(storageKey);
 			if (saved) {
 				const parsed = JSON.parse(saved);
 				const loadedMessages = parsed.map((msg) => ({
@@ -29,24 +39,26 @@ const useIRC = (channelName, options = {}) => {
 		} catch (e) {
 			console.error("Error loading IRC messages from localStorage:", e);
 		}
-	}, []);
+	}, [getStorageKey]);
 
-	// Save messages to localStorage
-	const saveMessagesToStorage = useCallback((messages) => {
-		if (typeof window === "undefined") return;
+	const saveMessagesToStorage = useCallback(
+		(messages) => {
+			if (typeof window === "undefined") return;
 
-		try {
-			const toSave = messages.slice(-MAX_MESSAGES).map((msg) => ({
-				...msg,
-				timestamp: msg.timestamp.toISOString(),
-			}));
-			localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
-		} catch (e) {
-			console.error("Error saving IRC messages to localStorage:", e);
-		}
-	}, []);
+			try {
+				const storageKey = getStorageKey();
+				const toSave = messages.slice(-MAX_MESSAGES).map((msg) => ({
+					...msg,
+					timestamp: msg.timestamp.toISOString(),
+				}));
+				localStorage.setItem(storageKey, JSON.stringify(toSave));
+			} catch (e) {
+				console.error("Error saving IRC messages to localStorage:", e);
+			}
+		},
+		[getStorageKey]
+	);
 
-	// Broadcast messages to other windows/tabs
 	const broadcastMessages = useCallback((messages) => {
 		if (!broadcastChannelRef.current || broadcastChannelRef.current.readyState !== "open") {
 			return;
@@ -56,6 +68,7 @@ const useIRC = (channelName, options = {}) => {
 			broadcastChannelRef.current.postMessage({
 				type: "chat:new_message",
 				data: {
+					channelName: channelNameRef.current,
 					ircMessages: messages.slice(-MAX_MESSAGES).map((msg) => ({
 						...msg,
 						timestamp: msg.timestamp.toISOString(),
@@ -67,7 +80,6 @@ const useIRC = (channelName, options = {}) => {
 		}
 	}, []);
 
-	// Handle incoming IRC messages
 	const handleIRCMessage = useCallback(
 		(ircMessage) => {
 			setIrcMessages((prev) => {
@@ -90,7 +102,6 @@ const useIRC = (channelName, options = {}) => {
 		[saveMessagesToStorage, broadcastMessages]
 	);
 
-	// Connect to IRC
 	const connectIRC = useCallback(() => {
 		if (typeof window === "undefined") {
 			return;
@@ -136,7 +147,6 @@ const useIRC = (channelName, options = {}) => {
 		ircClient.connect();
 	}, [channelName, ircConnectionState, handleIRCMessage, onError, chat]);
 
-	// Disconnect from IRC
 	const disconnectIRC = useCallback(() => {
 		if (ircClientRef.current) {
 			ircClientRef.current.disconnect();
@@ -145,7 +155,6 @@ const useIRC = (channelName, options = {}) => {
 		setIrcConnectionState("disconnected");
 	}, []);
 
-	// Update broadcast channel reference
 	useEffect(() => {
 		const channel = options.broadcastChannel;
 		if (channel) {
@@ -153,7 +162,6 @@ const useIRC = (channelName, options = {}) => {
 		}
 	}, [options.broadcastChannel]);
 
-	// Listen to broadcast channel for message updates
 	useEffect(() => {
 		const channel = broadcastChannelRef.current;
 		if (!channel) return;
@@ -161,7 +169,7 @@ const useIRC = (channelName, options = {}) => {
 		const handleMessage = (event) => {
 			const { type, data } = event.data || {};
 
-			if (type === "chat:new_message" && data && data.ircMessages) {
+			if (type === "chat:new_message" && data && data.ircMessages && data.channelName === channelNameRef.current) {
 				const loadedMessages = data.ircMessages.map((msg) => ({
 					...msg,
 					timestamp: new Date(msg.timestamp),
@@ -177,7 +185,6 @@ const useIRC = (channelName, options = {}) => {
 		};
 	}, [options.broadcastChannel]);
 
-	// Cleanup on unmount
 	useEffect(
 		() => () => {
 			disconnectIRC();
