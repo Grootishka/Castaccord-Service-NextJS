@@ -58,6 +58,66 @@ export default function reducer(state = initialState, actions = {}) {
 			return {
 				...initialState,
 			};
+		case types.EDIT_BOT:
+			return {
+				...state,
+				botAccounts: state.botAccounts.map((bot) => {
+					const botId = bot?.attributes?.id;
+					if (botId != null && Number(botId) === Number(actions.botId)) {
+						return {
+							...bot,
+							attributes: {
+								...bot.attributes,
+								...(actions.payload.badge_id !== undefined && {
+									selected_badge_id: actions.payload.badge_id,
+								}),
+								...(actions.payload.chat_color !== undefined && {
+									chat_color: actions.payload.chat_color,
+								}),
+							},
+						};
+					}
+					return bot;
+				}),
+			};
+		case types.UPSERT_BOT: {
+			const incoming = actions.bot;
+			if (!incoming || !incoming.attributes) {
+				return state;
+			}
+
+			const incomingId = incoming.attributes.id != null ? incoming.attributes.id : Number(incoming.id);
+			if (!Number.isFinite(Number(incomingId))) {
+				return state;
+			}
+
+			let found = false;
+			const updated = state.botAccounts.map((bot) => {
+				const botId = bot?.attributes?.id;
+				if (botId != null && Number(botId) === Number(incomingId)) {
+					found = true;
+					return incoming;
+				}
+				return bot;
+			});
+
+			if (!found) {
+				updated.push(incoming);
+			}
+
+			return {
+				...state,
+				botAccounts: updated,
+			};
+		}
+		case types.DELETE_BOT:
+			return {
+				...state,
+				botAccounts: state.botAccounts.filter((bot) => {
+					const botId = bot?.attributes?.id;
+					return botId != null && Number(botId) !== Number(actions.botId);
+				}),
+			};
 		default:
 			return state;
 	}

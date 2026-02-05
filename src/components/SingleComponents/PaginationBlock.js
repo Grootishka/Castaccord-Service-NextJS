@@ -4,8 +4,9 @@ import { useTranslation } from "next-i18next";
 
 import "assets/scss/SingleComponents/PaginationBlock.scss";
 
-const PaginationBlock = ({ pagination, func }) => {
-	const { t } = useTranslation("dashboardPage");
+const PaginationBlock = ({ pagination, func, namespace = "common", compact = false }) => {
+	const { t, i18n } = useTranslation(namespace);
+	const isCompactMode = compact && (i18n.language === "ua" || i18n.language === "ru");
 
 	return (
 		<div className="pagination">
@@ -15,12 +16,14 @@ const PaginationBlock = ({ pagination, func }) => {
 					if (pagination.page > 1) func(pagination.page - 1);
 				}}
 			>
-				{`< ${t("pagination.prev")}`}
+				{isCompactMode ? "<" : `< ${t("pagination.prev")}`}
 			</div>
 
-			<span className="pagination-info">
-				{t("pagination.page")} {pagination.page} {t("pagination.of")} {pagination.totalPages}
-			</span>
+			{!isCompactMode && (
+				<span className="pagination-info">
+					{t("pagination.page")} {pagination.page} {t("pagination.of")} {pagination.totalPages}
+				</span>
+			)}
 
 			<div
 				className={`pagination-btn ${pagination.page >= pagination.totalPages ? "disabled" : ""}`}
@@ -28,7 +31,7 @@ const PaginationBlock = ({ pagination, func }) => {
 					if (pagination.page < pagination.totalPages) func(pagination.page + 1);
 				}}
 			>
-				{`${t("pagination.next")} >`}
+				{isCompactMode ? ">" : `${t("pagination.next")} >`}
 			</div>
 		</div>
 	);
@@ -40,6 +43,8 @@ PaginationBlock.propTypes = {
 		totalPages: PropTypes.number.isRequired,
 	}),
 	func: PropTypes.func.isRequired,
+	namespace: PropTypes.string,
+	compact: PropTypes.bool,
 };
 
 export default PaginationBlock;

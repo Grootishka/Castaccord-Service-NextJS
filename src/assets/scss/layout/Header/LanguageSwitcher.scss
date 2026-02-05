@@ -1,0 +1,95 @@
+@import "../../colors.scss";
+
+.header-language-switcher {
+    position: relative;
+    margin-left: 12px;
+
+    .header-language-switcher-button {
+        display: flex;
+        align-items: center;
+        background-color: $button-background-color;
+        border: 1px solid $border-color;
+        border-radius: 6px;
+        padding: 8px 12px;
+        cursor: pointer;
+        transition: all 0.2s linear;
+        outline: none;
+
+        &:hover {
+            background-color: $button-hover-color;
+            border-color: $purple;
+
+            .header-language-switcher-current {
+                color: $text-white-color;
+            }
+
+            .header-language-switcher-arrow {
+                color: $text-white-color;
+            }
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        .header-language-switcher-current {
+            font-size: 14px;
+            font-family: JuraSemiBold, sans-serif;
+            color: $text-gray-color;
+            margin-right: 6px;
+            transition: color 0.2s linear;
+        }
+
+        .header-language-switcher-arrow {
+            color: $text-gray-color;
+            transition: color 0.2s linear;
+        }
+    }
+
+    .header-language-switcher-dropdown {
+        position: absolute;
+        top: calc(100% + 4px);
+        right: 0;
+        background-color: $block-background-color;
+        border: 1px solid $border-color;
+        border-radius: 6px;
+        min-width: 150px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        z-index: 10001;
+        overflow: hidden;
+
+        .header-language-switcher-option {
+            display: block;
+            width: 100%;
+            padding: 10px 16px;
+            text-align: left;
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-family: JuraSemiBold, sans-serif;
+            color: $text-gray-color;
+            cursor: pointer;
+            transition: all 0.2s linear;
+            outline: none;
+
+            &:hover {
+                background-color: $button-hover-color;
+                color: $text-white-color;
+            }
+
+            &.header-language-switcher-option-active {
+                background-color: rgba(119, 44, 232, 0.2);
+                color: $purple;
+
+                &:hover {
+                    background-color: rgba(119, 44, 232, 0.3);
+                    color: $purple;
+                }
+            }
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}

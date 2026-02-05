@@ -34,4 +34,7 @@ module.exports = withBundleAnalyzer({
 	sassOptions: {
 		includePaths: [path.join(__dirname, "assets/scss")],
 	},
+	images: {
+		domains: ["static-cdn.jtvnw.net"],
+	},
 });

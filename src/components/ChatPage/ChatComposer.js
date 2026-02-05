@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReplyModeIndicator from "components/ChatPage/ReplyModeIndicator";
+import PreparedMessages from "components/ChatPage/PreparedMessages";
 
 import "assets/scss/ChatPage/ChatComposer.scss";
 
-const ChatComposer = ({ chat, message, setMessage, onKeyDown, sendMessage, isSendDisabled, sendingAsText, replyMode, setReplyMode, isAutoMode, textareaRef, onToggleBots, hideBotsText }) => (
+const ChatComposer = ({ chat, message, setMessage, onKeyDown, sendingAsText, replyMode, setReplyMode, isAutoMode, textareaRef, onToggleBots, hideBotsText, onSendPreparedMessage }) => (
 	<div className="chat-composer-block">
 		<div className="chat-composer-top">
 			<div className="chat-composer-left">
@@ -22,8 +23,9 @@ const ChatComposer = ({ chat, message, setMessage, onKeyDown, sendMessage, isSen
 				</button>
 			</div>
 		</div>
+		<PreparedMessages setMessage={setMessage} textareaRef={textareaRef} onSendPreparedMessage={onSendPreparedMessage} />
 
-		<textarea ref={textareaRef} className="chat-composer-textarea" value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={onKeyDown} placeholder={replyMode ? chat?.replyPlaceholder : chat?.messagePlaceholder} disabled={isSendDisabled} spellCheck={false} />
+		<textarea ref={textareaRef} className="chat-composer-textarea" value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={onKeyDown} placeholder={replyMode ? chat?.replyPlaceholder : chat?.messagePlaceholder} spellCheck={false} />
 	</div>
 );
 
@@ -32,8 +34,6 @@ ChatComposer.propTypes = {
 	message: PropTypes.string.isRequired,
 	setMessage: PropTypes.func.isRequired,
 	onKeyDown: PropTypes.func.isRequired,
-	sendMessage: PropTypes.func.isRequired,
-	isSendDisabled: PropTypes.bool.isRequired,
 	sendingAsText: PropTypes.string.isRequired,
 	replyMode: PropTypes.object,
 	setReplyMode: PropTypes.func.isRequired,
@@ -41,6 +41,7 @@ ChatComposer.propTypes = {
 	textareaRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.any })]).isRequired,
 	onToggleBots: PropTypes.func.isRequired,
 	hideBotsText: PropTypes.string.isRequired,
+	onSendPreparedMessage: PropTypes.func.isRequired,
 };
 
 ChatComposer.defaultProps = {

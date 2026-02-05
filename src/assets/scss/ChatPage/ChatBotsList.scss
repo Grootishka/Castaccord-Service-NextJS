@@ -22,7 +22,10 @@
 		.chat-panel-title-wrapper {
 			display: flex;
 			align-items: center;
-			gap: 8px;
+
+			.chat-panel-title {
+				margin-right: 8px;
+			}
 		}
 
 		.chat-panel-title {
@@ -64,8 +67,8 @@
 			&:focus {
 				outline: none;
 				box-shadow: none;
-				border-color: rgba(119, 44, 232, 0.35);
-				background-color: rgba(119, 44, 232, 0.08);
+				border-color: $purple-border-light;
+				background-color: $purple-bg-very-light;
 			}
 
 			&:active {
@@ -82,27 +85,27 @@
 		min-height: 0;
 
 		scrollbar-width: thin;
-		scrollbar-color: rgba(119, 44, 232, 0.55) rgba(255, 255, 255, 0.06);
+		scrollbar-color: $purple-scrollbar $white-transparent-scrollbar;
 
 		&::-webkit-scrollbar {
 			width: 8px;
 		}
 
 		&::-webkit-scrollbar-track {
-			background: rgba(255, 255, 255, 0.06);
+			background: $white-transparent-scrollbar;
 			border-radius: 10px;
 		}
 
 		&::-webkit-scrollbar-thumb {
-			background: rgba(119, 44, 232, 0.55);
+			background: $purple-scrollbar;
 			border-radius: 10px;
-			border: 2px solid rgba(0, 0, 0, 0);
+			border: 2px solid transparent;
 			background-clip: padding-box;
 			transition: background-color 0.2s linear;
 		}
 
 		&::-webkit-scrollbar-thumb:hover {
-			background: rgba(119, 44, 232, 0.85);
+			background: $purple-scrollbar-hover;
 			background-clip: padding-box;
 		}
 
@@ -131,8 +134,8 @@
 			box-shadow: none;
 
 			&:hover {
-				background-color: rgba(119, 44, 232, 0.12);
-				border-color: rgba(119, 44, 232, 0.35);
+				background-color: $purple-bg-light;
+				border-color: $purple-border-light;
 			}
 
 			&:focus {
@@ -146,8 +149,8 @@
 			}
 
 			&.chat-bot-item-selected {
-				background-color: rgba(107, 39, 209, 0.25);
-				border-color: rgba(107, 39, 209, 0.65);
+				background-color: $dark-purple-bg-light;
+				border-color: $dark-purple-border-medium;
 			}
 
 			&.chat-bot-item-disabled {
@@ -168,7 +171,20 @@
 				display: flex;
 				align-items: center;
 				justify-content: flex-end;
-				gap: 8px;
+				flex-shrink: 0;
+				min-width: 60px;
+
+				.chat-bot-badge {
+					margin-left: 8px;
+					flex-shrink: 0;
+				}
+
+				.chat-bot-picked {
+					margin-left: 8px;
+					flex-shrink: 0;
+					min-width: 50px;
+					text-align: center;
+				}
 			}
 
 			.chat-bot-item-left {
@@ -218,8 +234,8 @@
 
 				padding: 4px 8px;
 				border-radius: 8px;
-				background-color: rgba(107, 39, 209, 0.35);
-				border: 1px solid rgba(107, 39, 209, 0.55);
+				background-color: $dark-purple-bg-medium;
+				border: 1px solid $dark-purple-border-light;
 				text-transform: capitalize;
 			}
 
@@ -231,22 +247,32 @@
 
 				padding: 4px 8px;
 				border-radius: 8px;
-				background-color: rgba(255, 255, 255, 0.05);
+				background-color: $white-transparent-very-light;
 				border: 1px solid $border-color;
 				text-transform: capitalize;
 
 				&.chat-bot-badge-active {
 					color: $text-green-color;
-					background-color: rgba(52, 199, 89, 0.1);
-					border-color: rgba(52, 199, 89, 0.3);
+					background-color: $green-bg-very-light;
+					border-color: $green-border-light;
 				}
 
 				&.chat-bot-badge-invalid {
 					color: $text-red-color;
-					background-color: rgba(255, 69, 58, 0.1);
-					border-color: rgba(255, 69, 58, 0.3);
+					background-color: $red-bg-very-light;
+					border-color: $red-border-very-light;
 				}
 			}
+		}
+	}
+
+	.chat-bots-pagination {
+		flex: 0 0 auto;
+		padding: 10px;
+		border-top: 1px solid $border-color;
+
+		.pagination {
+			margin-top: 0;
 		}
 	}
 }

@@ -21,6 +21,9 @@ const NavBar = () => {
 			case header?.chat:
 				router.push("/chat", null, { locale: i18n.language });
 				break;
+			case header?.botsList:
+				router.push("/bots-list", null, { locale: i18n.language });
+				break;
 			default:
 				break;
 		}
@@ -30,6 +33,9 @@ const NavBar = () => {
 		<div className="header-nav-bar">
 			<div className="header-nav-bar-item" onClick={() => handleClick(header?.importTokens)}>
 				<p className="header-nav-bar-item-text">{header?.importTokens || ""}</p>
+			</div>
+			<div className="header-nav-bar-item" onClick={() => handleClick(header?.botsList)}>
+				<p className="header-nav-bar-item-text">{header?.botsList || ""}</p>
 			</div>
 			<div className="header-nav-bar-item" onClick={() => handleClick(header?.chat)}>
 				<p className="header-nav-bar-item-text">{header?.chat || ""}</p>

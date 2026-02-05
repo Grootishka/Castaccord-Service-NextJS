@@ -6,6 +6,13 @@ import { setCookie } from "cookies-next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import withSSRRedirect from "helpers/withSSRRedirect";
 import getSEOOptions from "services/getSEOOptions";
+import Hero from "components/HomePage/Hero";
+import Features from "components/HomePage/Features";
+import Benefits from "components/HomePage/Benefits";
+import FAQ from "components/HomePage/FAQ";
+import CTA from "components/HomePage/CTA";
+
+import "assets/scss/HomePage/main.scss";
 
 const Index = () => {
 	const router = useRouter();
@@ -24,9 +31,13 @@ const Index = () => {
 	}, []);
 
 	return (
-		<Container nogutters="true">
-			<div className="main-block"></div>
-		</Container>
+		<div className="home-page">
+			<Hero content={content} />
+			<Features content={content} />
+			<Benefits content={content} />
+			<FAQ content={content} />
+			<CTA content={content} />
+		</div>
 	);
 };
 

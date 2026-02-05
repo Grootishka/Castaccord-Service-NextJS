@@ -3,13 +3,16 @@
 .reply-mode-indicator {
 	padding: 4px 8px;
 	border-radius: 6px;
-	background-color: rgba(107, 39, 209, 0.2);
+	background-color: $dark-purple-bg-very-light;
 	border: 1px solid $button-active-color;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 8px;
 	margin: 0;
+
+	.reply-mode-indicator-text {
+		margin-right: 8px;
+	}
 
 	.reply-mode-indicator-text {
 		font-family: JuraSemiBold, sans-serif;
@@ -39,7 +42,7 @@
 		line-height: 1;
 
 		&:hover {
-			background-color: rgba(255, 69, 58, 0.2);
+			background-color: $red-bg-light;
 			color: $text-red-color;
 		}
 

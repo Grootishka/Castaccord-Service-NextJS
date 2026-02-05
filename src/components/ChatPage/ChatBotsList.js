@@ -1,11 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
+import PaginationBlock from "components/SingleComponents/PaginationBlock";
 
 import "assets/scss/ChatPage/ChatBotsList.scss";
 
 const ChatBotsList = ({ chat, botsViewModels, botSearchQuery, setBotSearchQuery, onSelectBot, activeBotsCount }) => {
 	const [animatedPlaceholder, setAnimatedPlaceholder] = useState("");
+	const [currentPage, setCurrentPage] = useState(1);
+	const itemsPerPage = 10;
 	const placeholderText = chat?.searchBotsByName || "";
+
+	const totalPages = useMemo(() => Math.ceil(botsViewModels.length / itemsPerPage), [botsViewModels.length, itemsPerPage]);
+
+	const paginatedBots = useMemo(() => {
+		const startIndex = (currentPage - 1) * itemsPerPage;
+		const endIndex = startIndex + itemsPerPage;
+		return botsViewModels.slice(startIndex, endIndex);
+	}, [botsViewModels, currentPage, itemsPerPage]);
+
+	const handlePageChange = (page) => {
+		setCurrentPage(page);
+	};
 
 	useEffect(() => {
 		if (!botSearchQuery && placeholderText) {
@@ -37,6 +52,16 @@ const ChatBotsList = ({ chat, botsViewModels, botSearchQuery, setBotSearchQuery,
 		setAnimatedPlaceholder("");
 	}, [botSearchQuery, placeholderText]);
 
+	useEffect(() => {
+		setCurrentPage(1);
+	}, [botSearchQuery]);
+
+	useEffect(() => {
+		if (currentPage > totalPages && totalPages > 0) {
+			setCurrentPage(totalPages);
+		}
+	}, [totalPages, currentPage]);
+
 	return (
 		<div className="chat-bots-block">
 			<div className="chat-panel-header">
@@ -53,7 +78,7 @@ const ChatBotsList = ({ chat, botsViewModels, botSearchQuery, setBotSearchQuery,
 			<div className="chat-bots-list">
 				{!botsViewModels.length && <p className="chat-bots-empty">{chat?.botsEmpty || ""}</p>}
 
-				{botsViewModels.map((vm) => (
+				{paginatedBots.map((vm) => (
 					<button key={vm.id} className={["chat-bot-item", vm.isHighlighted ? "chat-bot-item-selected" : "", vm.isDisabled ? "chat-bot-item-disabled" : ""].join(" ")} type="button" onClick={() => onSelectBot(vm.id)} disabled={vm.isDisabled}>
 						<div className="chat-bot-item-left">
 							<div className={["chat-bot-status", vm.isActiveStatus ? "chat-bot-status-active" : ""].join(" ")} />
@@ -63,13 +88,20 @@ const ChatBotsList = ({ chat, botsViewModels, botSearchQuery, setBotSearchQuery,
 						</div>
 
 						<div className="chat-bot-right">
-							{!!vm.subtitle && !vm.isCurrentSender && <p className={["chat-bot-badge", `chat-bot-badge-${vm.subtitle}`].join(" ")}>{vm.subtitle}</p>}
-							{vm.isCurrentSender && <p className="chat-bot-picked">{chat?.activeBot || ""}</p>}
-							{vm.isSelectedManual && !vm.isCurrentSender && <p className="chat-bot-picked">{chat?.picked || ""}</p>}
+							{/* {!!vm.subtitle && <p className={["chat-bot-badge", `chat-bot-badge-${vm.subtitle}`].join(" ")}>{vm.subtitle}</p>} */}
+							<p className="chat-bot-picked" style={{ visibility: vm.isCurrentSender || vm.isSelectedManual ? "visible" : "hidden" }}>
+								{chat?.picked || ""}
+							</p>
 						</div>
 					</button>
 				))}
 			</div>
+
+			{totalPages > 1 && (
+				<div className="chat-bots-pagination">
+					<PaginationBlock pagination={{ page: currentPage, totalPages }} func={handlePageChange} compact={true} />
+				</div>
+			)}
 		</div>
 	);
 };

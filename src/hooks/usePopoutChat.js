@@ -90,7 +90,7 @@ const usePopoutChat = (onRestoreCallback) => {
 			return;
 		}
 
-		const width = 200;
+		const width = 600;
 		const height = 720;
 		const left = window.screenX + (window.outerWidth - width) / 2;
 		const top = window.screenY + (window.outerHeight - height) / 2;

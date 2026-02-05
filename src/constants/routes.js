@@ -159,4 +159,35 @@ const ChatPopoutRoute = {
 	},
 };
 
-export default [MainRoute, LoginRoute, ImportTokensRoute, ChatRoute, ChatPopoutRoute];
+const BotsListRoute = {
+	path: "/bots-list",
+	accessType: "onlyAuth",
+	helmet: {
+		en: {
+			title: "Bots List",
+			description: "Bots list on the platform.",
+			keywords: "bots, list, platform",
+			noIndex: false,
+			noFollow: false,
+			hasQuery: false,
+		},
+		ru: {
+			title: "Список ботов",
+			description: "Список ботов на платформе.",
+			keywords: "боты, список, платформа",
+			noIndex: false,
+			noFollow: false,
+			hasQuery: false,
+		},
+		ua: {
+			title: "Список ботів",
+			description: "Список ботів на платформі.",
+			keywords: "боти, список, платформа",
+			noIndex: false,
+			noFollow: false,
+			hasQuery: false,
+		},
+	},
+};
+
+export default [MainRoute, LoginRoute, ImportTokensRoute, ChatRoute, ChatPopoutRoute, BotsListRoute];

@@ -1,0 +1,50 @@
+{
+	"title": "Bots List",
+	"searchPlaceholder": "Search by username, ID, or status...",
+	"tableHeaders": {
+		"icon": "Icon",
+		"username": "Username",
+		"color": "Color",
+		"status": "Status",
+		"actions": "Actions"
+	},
+	"status": {
+		"active": "active",
+		"banned": "banned",
+		"invalid": "invalid",
+		"pending": "pending"
+	},
+	"actions": {
+		"edit": "Edit",
+		"delete": "Delete"
+	},
+	"empty": "No bots found",
+	"footer": {
+		"totalWithCount": "Total: {{count}} bot",
+		"totalWithCountPlural": "Total: {{count}} bots",
+		"totalActive": "Total active bots: {{count}}",
+		"totalActivePlural": "Total active bots: {{count}}",
+		"totalBanned": "Total banned bots: {{count}}",
+		"totalBannedPlural": "Total banned bots: {{count}}",
+		"totalInvalid": "Total invalid bots: {{count}}",
+		"totalInvalidPlural": "Total invalid bots: {{count}}",
+		"totalPending": "Total pending bots: {{count}}",
+		"totalPendingPlural": "Total pending bots: {{count}}"
+	},
+	"messages": {
+		"updateError": "Failed to update bot"
+	},
+	"editModal": {
+		"title": "Edit Bot",
+		"icon": "Icon",
+		"color": "Color",
+		"save": "Save",
+		"saving": "Saving...",
+		"cancel": "Cancel"
+	},
+	"botFallbackName": "Bot #{{id}}",
+	"warning": {
+		"title": "Important",
+		"message": "After saving, changes may not apply instantly — usually within 5–15 seconds."
+	}
+}

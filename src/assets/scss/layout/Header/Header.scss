@@ -5,6 +5,8 @@
 	background-color: $header-background-color;
 	backdrop-filter: blur(8px);
 	border-bottom: 1px solid $border-color;
+	position: relative;
+	z-index: 10000;
 
 	.header-block {
 		height: 65px;
@@ -12,11 +14,11 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-	
-		@media screen and (width >= 992px) {}
-	
+
+		@media screen and (width >=992px) {}
+
 		.header-logo-block {
-	
+
 			.header-logo-text {
 				.title {
 					cursor: pointer;
@@ -28,11 +30,18 @@
 		}
 	}
 
+	.header-right-block {
+		display: flex;
+		align-items: center;
+		height: 100%;
+	}
+
 	.login-block {
 		height: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		margin-left: 12px;
 
 		.login-button {
 			background-color: $button-background-color;

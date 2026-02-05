@@ -1,11 +1,132 @@
-$background-color: #0e0e10;
-$header-background-color: #18181bcc;
-$block-background-color: #18181b;
-$border-color: #2a2a31;
-$button-background-color: #1f1f23;
-$text-gray-color: #adadb8;
-$text-white-color: #efeff1;
-$text-red-color: #ff453a;
-$text-green-color: #34c759;
-$button-hover-color: #772ce8;
-$button-active-color: #6b27d1;
+// Base colors
+$black: #0e0e10;
+$dark-gray: #18181b;
+$dark-gray-transparent: #18181bcc;
+$gray-border: #2a2a31;
+$dark-gray-button: #1f1f23;
+$gray-text: #adadb8;
+$white: #efeff1;
+$red: #ff453a;
+$green: #34c759;
+$purple: #772ce8;
+$dark-purple: #6b27d1;
+$orange: #ff9f0a;
+$yellow: #ffd60a;
+$cyan: #19c4f9;
+
+// Status colors with opacity
+$green-bg-light: rgba(52, 199, 89, 0.2);
+$orange-bg-light: rgba(255, 159, 10, 0.2);
+$red-bg-light: rgba(255, 69, 58, 0.2);
+$yellow-bg-light: rgba(255, 214, 10, 0.2);
+
+// Info/Warning colors with opacity
+$cyan-bg-light: rgba(25, 196, 249, 0.1);
+$cyan-border-light: rgba(25, 196, 249, 0.3);
+
+// Purple colors with opacity
+$purple-bg-very-light: rgba(119, 44, 232, 0.08);
+$purple-bg-light: rgba(119, 44, 232, 0.12);
+$purple-bg-medium: rgba(119, 44, 232, 0.2);
+$purple-bg-medium-2: rgba(119, 44, 232, 0.3);
+$purple-border-light: rgba(119, 44, 232, 0.35);
+$purple-border-medium: rgba(119, 44, 232, 0.5);
+$purple-scrollbar: rgba(119, 44, 232, 0.55);
+$purple-scrollbar-hover: rgba(119, 44, 232, 0.85);
+
+// Red colors with opacity
+$red-bg-medium: rgba(255, 69, 58, 0.3);
+$red-border-light: rgba(255, 69, 58, 0.3);
+$red-border-medium: rgba(255, 69, 58, 0.5);
+
+// Dark purple colors with opacity
+$dark-purple-bg-light: rgba(107, 39, 209, 0.25);
+$dark-purple-bg-medium: rgba(107, 39, 209, 0.35);
+$dark-purple-border-light: rgba(107, 39, 209, 0.55);
+$dark-purple-border-medium: rgba(107, 39, 209, 0.65);
+
+// Green colors with opacity
+$green-bg-very-light: rgba(52, 199, 89, 0.1);
+$green-border-light: rgba(52, 199, 89, 0.3);
+
+// Red colors with opacity (additional)
+$red-bg-very-light: rgba(255, 69, 58, 0.1);
+$red-border-very-light: rgba(255, 69, 58, 0.3);
+
+// White colors with opacity (additional)
+$white-transparent-very-light: rgba(255, 255, 255, 0.03);
+$white-transparent-medium-2: rgba(255, 255, 255, 0.4);
+
+// Dark purple colors with opacity (additional)
+$dark-purple-bg-very-light: rgba(107, 39, 209, 0.2);
+$dark-purple-bg-medium-2: rgba(107, 39, 209, 0.3);
+
+// Cyan/Light blue colors
+$cyan-light: #b6dbe2;
+$cyan-bright: #19bff2;
+$cyan-very-light: #eaf7fc;
+$cyan-very-light-2: #e6fbff;
+$cyan-shadow: rgba(25, 191, 242, 0.64);
+
+// Pink/Red colors
+$pink: #ff3072;
+
+// Gray colors
+$gray-dark-2: #1d1d1d;
+$gray-dark-3: #131416;
+$gray-medium: #9eb5b9;
+$gray-dark-transparent: rgba(29, 29, 29, 0.7);
+$gray-medium-transparent: rgba(80, 80, 80, 0.5);
+$gray-light-transparent: rgba(200, 200, 200, 0.6);
+$gray-very-light-transparent: rgba(246, 247, 251, 0);
+$black-transparent-medium-2: rgba(0, 0, 0, 0.5);
+$black-transparent-shadow: rgba(0, 0, 0, 0.25);
+$black-transparent-shadow-2: rgba(0, 0, 0, 0.2);
+$black-transparent-shadow-3: rgba(0, 0, 0, 0.3);
+$white-transparent-disabled: rgba(255, 255, 255, 0.3);
+
+// Modal/Shadow colors
+$black-transparent-dark: rgba(0, 0, 0, 0.7);
+$black-transparent-medium: rgba(0, 0, 0, 0.3);
+$black-transparent-light: rgba(0, 0, 0, 0.4);
+$white-transparent-very-light: rgba(255, 255, 255, 0.05);
+$white-transparent-scrollbar: rgba(255, 255, 255, 0.06);
+$white-transparent-light: rgba(255, 255, 255, 0.1);
+$white-transparent-medium: rgba(255, 255, 255, 0.3);
+$white-transparent-placeholder: rgba(255, 255, 255, 0.35);
+
+// Legacy aliases for backward compatibility
+$background-color: $black;
+$header-background-color: $dark-gray-transparent;
+$block-background-color: $dark-gray;
+$border-color: $gray-border;
+$button-background-color: $dark-gray-button;
+$text-gray-color: $gray-text;
+$text-white-color: $white;
+$text-red-color: $red;
+$text-green-color: $green;
+$button-hover-color: $purple;
+$button-active-color: $dark-purple;
+$status-active-bg: $green-bg-light;
+$status-pending-color: $orange;
+$status-pending-bg: $orange-bg-light;
+$status-banned-bg: $red-bg-light;
+$status-invalid-color: $yellow;
+$status-invalid-bg: $yellow-bg-light;
+$warning-info-color: $cyan;
+$warning-info-bg: $cyan-bg-light;
+$warning-info-border: $cyan-border-light;
+$button-edit-bg: $purple-bg-medium;
+$button-edit-border: $purple-border-light;
+$button-edit-border-hover: $purple-border-medium;
+$button-edit-bg-hover: $purple-bg-medium-2;
+$button-delete-bg: $red-bg-light;
+$button-delete-border: $red-border-light;
+$button-delete-border-hover: $red-border-medium;
+$button-delete-bg-hover: $red-bg-medium;
+$modal-backdrop-bg: $black-transparent-dark;
+$modal-shadow: $black-transparent-medium;
+$modal-shadow-inset-light: $white-transparent-light;
+$modal-shadow-inset-dark: $black-transparent-light;
+$modal-selected-shadow: $white-transparent-medium;
+$text-placeholder-color: $white-transparent-placeholder;

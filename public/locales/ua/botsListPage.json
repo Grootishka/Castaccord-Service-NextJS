@@ -1,0 +1,50 @@
+{
+	"title": "Список ботів",
+	"searchPlaceholder": "Пошук за ім'ям, ID або статусом...",
+	"tableHeaders": {
+		"icon": "Значок",
+		"username": "Ім'я користувача",
+		"color": "Колір",
+		"status": "Статус",
+		"actions": "Дії"
+	},
+	"status": {
+		"active": "активний",
+		"banned": "заблокований",
+		"invalid": "недійсний",
+		"pending": "в обробці"
+	},
+	"actions": {
+		"edit": "Редагувати",
+		"delete": "Видалити"
+	},
+	"empty": "Ботів не знайдено",
+	"footer": {
+		"totalWithCount": "Всього: {{count}} бот",
+		"totalWithCountPlural": "Всього: {{count}} ботів",
+		"totalActive": "Всього активних ботів: {{count}}",
+		"totalActivePlural": "Всього активних ботів: {{count}}",
+		"totalBanned": "Всього заблокованих ботів: {{count}}",
+		"totalBannedPlural": "Всього заблокованих ботів: {{count}}",
+		"totalInvalid": "Всього недійсних ботів: {{count}}",
+		"totalInvalidPlural": "Всього недійсних ботів: {{count}}",
+		"totalPending": "Всього ботів в обробці: {{count}}",
+		"totalPendingPlural": "Всього ботів в обробці: {{count}}"
+	},
+	"messages": {
+		"updateError": "Не вдалося оновити бота"
+	},
+	"editModal": {
+		"title": "Редагувати бота",
+		"icon": "Значок",
+		"color": "Колір",
+		"save": "Зберегти",
+		"saving": "Збереження...",
+		"cancel": "Скасувати"
+	},
+	"botFallbackName": "Бот #{{id}}",
+	"warning": {
+		"title": "Важливо",
+		"message": "Після збереження зміни можуть застосуватися не одразу — зазвичай 5–15 секунд."
+	}
+}

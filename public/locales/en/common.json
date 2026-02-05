@@ -4,6 +4,13 @@
       "connectTwitch": "Connect Twitch",
       "importTokens": "Import Tokens",
       "chat": "Chat",
-      "login": "Login"
+      "login": "Login",
+      "botsList": "Bots List"
+  },
+  "pagination": {
+      "prev": "Previous",
+      "next": "Next",
+      "page": "Page",
+      "of": "of"
   }
 }

@@ -16,21 +16,21 @@
 		min-height: 0;
 
 		scrollbar-width: thin;
-		scrollbar-color: $button-hover-color rgba(255, 255, 255, 0.06);
+		scrollbar-color: $button-hover-color $white-transparent-scrollbar;
 
 		&::-webkit-scrollbar {
 			width: 8px;
 		}
 
 		&::-webkit-scrollbar-track {
-			background: rgba(255, 255, 255, 0.06);
+			background: $white-transparent-scrollbar;
 			border-radius: 10px;
 		}
 
 		&::-webkit-scrollbar-thumb {
 			background: $button-hover-color;
 			border-radius: 10px;
-			border: 2px solid rgba(0, 0, 0, 0);
+			border: 2px solid transparent;
 			background-clip: padding-box;
 			transition: background-color 0.2s linear;
 		}
@@ -57,7 +57,7 @@
 			margin-bottom: 12px;
 			padding: 8px 10px;
 			border-radius: 8px;
-			background-color: rgba(255, 255, 255, 0.03);
+			background-color: $white-transparent-very-light;
 			border: 1px solid transparent;
 			transition: all 0.2s linear;
 			cursor: pointer;
@@ -80,18 +80,18 @@
 			}
 
 			&.irc-chat-message-selected {
-				background-color: rgba(107, 39, 209, 0.25);
+				background-color: $dark-purple-bg-light;
 				border-color: $button-active-color;
 			}
 
 			.irc-chat-message-header {
 				display: flex;
 				align-items: center;
-				gap: 8px;
 				margin-bottom: 4px;
 				flex-wrap: wrap;
 
 				.irc-chat-message-username {
+					margin-right: 8px;
 					font-family: JuraBold, sans-serif;
 					font-size: 14px;
 					color: $text-white-color;
@@ -106,13 +106,13 @@
 					letter-spacing: 0.5px;
 
 					&.irc-chat-message-badge-bot {
-						background-color: rgba(107, 39, 209, 0.3);
+						background-color: $dark-purple-bg-medium-2;
 						color: $button-hover-color;
 						border: 1px solid $button-active-color;
 					}
 
 					&.irc-chat-message-badge-user {
-						background-color: rgba(52, 199, 89, 0.2);
+						background-color: $green-bg-light;
 						color: $text-green-color;
 						border: 1px solid $text-green-color;
 					}
