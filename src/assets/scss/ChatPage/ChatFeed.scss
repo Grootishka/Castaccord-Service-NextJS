@@ -30,7 +30,18 @@
 		.chat-panel-header-right {
 			display: flex;
 			align-items: center;
-			gap: 8px;
+
+			.chat-return-button {
+				margin-right: 8px;
+			}
+
+			.chat-popup-button {
+				margin-right: 8px;
+			}
+
+			.chat-type-switcher {
+				margin-left: 0;
+			}
 		}
 
 		.chat-return-button {
@@ -83,8 +94,8 @@
 			}
 
 			&:hover {
-				background-color: rgba(119, 44, 232, 0.12);
-				border-color: rgba(119, 44, 232, 0.35);
+				background-color: $purple-bg-light;
+				border-color: $purple-border-light;
 				color: $text-white-color;
 			}
 
@@ -102,7 +113,14 @@
 		.chat-type-switcher {
 			display: flex;
 			align-items: center;
-			gap: 8px;
+
+			.chat-type-button {
+				margin-left: 8px;
+
+				&:first-child {
+					margin-left: 0;
+				}
+			}
 
 			.chat-type-button {
 				padding: 6px 12px;
@@ -118,8 +136,8 @@
 				box-shadow: none;
 
 				&:hover {
-					background-color: rgba(119, 44, 232, 0.12);
-					border-color: rgba(119, 44, 232, 0.35);
+					background-color: $purple-bg-light;
+					border-color: $purple-border-light;
 					color: $text-white-color;
 				}
 
@@ -134,8 +152,8 @@
 				}
 
 				&.chat-type-button-active {
-					background-color: rgba(107, 39, 209, 0.25);
-					border-color: rgba(107, 39, 209, 0.65);
+					background-color: $dark-purple-bg-light;
+					border-color: $dark-purple-border-medium;
 					color: $text-white-color;
 				}
 			}

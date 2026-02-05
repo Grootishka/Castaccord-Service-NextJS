@@ -4,6 +4,13 @@
       "connectTwitch": "Подключить Twitch",
       "importTokens": "Импортировать токены",
       "chat": "Чат",
-      "login": "Вход"
+      "login": "Вход",
+      "botsList": "Список ботов"
+    },
+    "pagination": {
+        "prev": "Предыдущая",
+        "next": "Следующая",
+        "page": "Страница",
+        "of": "из"
     }
 }

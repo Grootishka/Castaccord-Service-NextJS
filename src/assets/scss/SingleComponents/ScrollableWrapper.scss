@@ -1,3 +1,5 @@
+@import "../colors.scss";
+
 .posts-list {
   flex-grow: 1;
   padding-top: 9px;
@@ -7,7 +9,7 @@
   position: relative;
   height: 310px;
 
-  @media screen and (width >= 992px) {
+  @media screen and (width >=992px) {
     height: 430px;
   }
 
@@ -20,7 +22,8 @@
     &.pagination-not-exist {
       &::after {
         bottom: -0px;
-        @media screen and (width >= 992px) {
+
+        @media screen and (width >=992px) {
           bottom: 0;
         }
       }
@@ -34,7 +37,7 @@
       top: 9px;
       left: 0;
       z-index: 1;
-      background: linear-gradient(0deg, rgba(246, 247, 251, 0) 0%, #131416 100%);
+      background: linear-gradient(0deg, $gray-very-light-transparent 0%, $gray-dark-3 100%);
       transition: opacity 0.2s;
       pointer-events: none;
     }
@@ -47,7 +50,7 @@
       bottom: 44px;
       left: 0;
       z-index: 1;
-      background: linear-gradient(180deg, rgba(246, 247, 251, 0) 0%, #131416 100%);
+      background: linear-gradient(180deg, $gray-very-light-transparent 0%, $gray-dark-3 100%);
       transition: opacity 0.2s;
       pointer-events: none;
     }
@@ -75,7 +78,7 @@
       }
 
       &::-webkit-scrollbar-thumb {
-       display: none;
+        display: none;
       }
 
       .items-list {
@@ -83,7 +86,8 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        @media screen and (width >= 992px) {
+
+        @media screen and (width >=992px) {
           justify-content: flex-start;
         }
       }

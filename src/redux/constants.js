@@ -1,5 +1,8 @@
 // Main
 export const SET_SSR_STORE_MAIN = "SET_SSR_STORE_MAIN";
+export const EDIT_BOT = "EDIT_BOT";
+export const DELETE_BOT = "DELETE_BOT";
+export const UPSERT_BOT = "UPSERT_BOT";
 
 export const SET_IS_MOBILE = "SET_IS_MOBILE";
 

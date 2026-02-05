@@ -58,7 +58,16 @@ module.exports = {
 		"arrow-body-style": [2, "as-needed"],
 		"default-param-last": 0,
 		"no-console": 0,
-		"max-len": ["error", 500],
+		"max-len": [
+			"error",
+			{
+				code: 350,
+				ignoreUrls: true,
+				ignoreStrings: true,
+				ignoreTemplateLiterals: true,
+				ignorePattern: "^\\s*<|^\\s*\\{",
+			},
+		],
 		"no-unexpected-multiline": "error",
 		"react/prop-types": 1,
 		"react/button-has-type": [

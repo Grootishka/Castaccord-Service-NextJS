@@ -1,3 +1,5 @@
+@import "../colors.scss";
+
 .modal {
 	.modal-dialog {
 		&.warning-comments-modal {
@@ -22,12 +24,12 @@
 		opacity: 1;
 		backdrop-filter: blur(40px);
 		-webkit-backdrop-filter: blur(40px);
-		background-color: rgba(0, 0, 0, 0.5);
+		background-color: $black-transparent-medium-2;
 	}
 }
 
 .modal-warning-block {
-	color: #fff;
+	color: $white;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -35,12 +37,12 @@
 	padding: 30px 24px;
 	border-radius: 20px;
 	backdrop-filter: blur(30px);
-	box-shadow: 15px 15px 20px 0 rgba(0, 0, 0, 0.3), inset 5px 5px 10px 0 rgba(255, 255, 255, 0.4), inset -10px -10px 15px 0 rgba(0, 0, 0, 0.4);
-	border: solid 2px #b6dbe2;
-	background-color: rgba(0, 0, 0, 0.4);
+	box-shadow: 15px 15px 20px 0 $black-transparent-shadow-3, inset 5px 5px 10px 0 $white-transparent-medium-2, inset -10px -10px 15px 0 $black-transparent-light;
+	border: solid 2px $cyan-light;
+	background-color: $black-transparent-light;
 	margin-top: 100px;
 
-	@media screen and (width >= 992px) {
+	@media screen and (width >=992px) {
 		max-width: 500px;
 		padding: 30px;
 		margin-top: 50px;
@@ -48,21 +50,21 @@
 
 	.modal-warning-title {
 		font-size: 24px;
-		color: #19bff2;
+		color: $cyan-bright;
 		font-family: JuraBold, sans-serif;
 		margin-bottom: 16px;
 	}
 
 	.modal-warning-paragraph {
 		font-size: 15px;
-		color: #b6dbe2;
+		color: $cyan-light;
 		margin-bottom: 10px;
 		font-family: JuraSemiBold, sans-serif;
 	}
 
 	.modal-warning-always {
 		font-size: 17px;
-		color: #ff3072;
+		color: $pink;
 		font-weight: bold;
 		margin-top: 15px;
 		margin-bottom: 8px;
@@ -72,7 +74,7 @@
 	}
 
 	.modal-warning-list {
-		color: #eaf7fc;
+		color: $cyan-very-light;
 		font-size: 15px;
 		font-family: JuraRegular, sans-serif;
 		margin-bottom: 15px;
@@ -86,17 +88,17 @@
 	.modal-warning-checkbox-row {
 		display: flex;
 		align-items: center;
-		gap: 10px;
 		margin-bottom: 14px;
 
 		input[type="checkbox"] {
-			accent-color: #19bff2;
+			margin-right: 10px;
+			accent-color: $cyan-bright;
 			width: 20px;
 			height: 20px;
 		}
 
 		.check-box-label {
-			color: #b6dbe2;
+			color: $cyan-light;
 			font-size: 14px;
 			font-family: JuraSemiBold, sans-serif;
 			cursor: pointer;
@@ -111,13 +113,13 @@
 		justify-content: center;
 		cursor: pointer;
 		padding: 10px 0;
-		background: #19bff2;
-		color: #fff;
+		background: $cyan-bright;
+		color: $white;
 		border: none;
 		font-size: 20px;
 		border-radius: 20px;
 		font-family: JuraBold, sans-serif;
 		transition: box-shadow 0.19s;
-		box-shadow: 0 2px 12px #19bff2a3;
+		box-shadow: 0 2px 12px $cyan-shadow;
 	}
 }

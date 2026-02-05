@@ -6,7 +6,7 @@ import { parse } from "next-useragent";
 import { connect } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import PropTypes from "prop-types";
-import { setSSRStoreMain } from "redux/actions/mainActions";
+import { setSSRStoreMain, upsertBot } from "redux/actions/mainActions";
 import makeStore from "redux/makeStore";
 import getAccessToken from "services/getAccessToken";
 import WSocket from "services/connectWebSocket";
@@ -42,19 +42,45 @@ class WebApp extends App {
 			isLoading: false,
 			url: "",
 		};
+
+		this.handleBotSocketMessage = this.handleBotSocketMessage.bind(this);
+		wsClient.setListenersMessage({
+			bots: this.handleBotSocketMessage,
+		});
 	}
 
 	componentDidUpdate(prevProps) {
 		const { isAuth } = this.props;
 		if (prevProps.isAuth !== isAuth && isAuth) {
-			// wsClient.connect();
+			wsClient.connect();
 		}
 	}
 
 	componentDidMount() {
 		const { isAuth } = this.props;
 		if (isAuth) {
-			// wsClient.connect();
+			wsClient.connect();
+		}
+	}
+
+	handleBotSocketMessage(event) {
+		const { dispatch } = this.props;
+		if (!event || !event.data) {
+			return;
+		}
+
+		try {
+			const payload = JSON.parse(event.data);
+			if (!payload || !payload.channel || !payload.bot || !payload.bot.data) {
+				return;
+			}
+
+			if (payload.channel === "bot-validated" || payload.channel === "bot-updated") {
+				dispatch(upsertBot(payload.bot.data));
+			}
+		} catch (e) {
+			// eslint-disable-next-line no-console
+			console.error("Error parsing websocket message:", e);
 		}
 	}
 
@@ -112,7 +138,7 @@ WebApp.getInitialProps = makeStore.getInitialAppProps((store) => async (context)
 			const [profileData, botAccounts] = await Promise.all([fetchWithToken("/api/v1/users/me", {}, "application/json", ctx), fetchWithToken("/api/v1/bot_accounts", {}, "application/json", ctx)]);
 
 			SSRStoreMain.isAuth = !!profileData.data.id;
-			SSRStoreMain.botAccounts = botAccounts.data.filter((bot) => bot.attributes.status === "active") || [];
+			SSRStoreMain.botAccounts = botAccounts.data || [];
 			SSRStoreMain.user = profileData.data?.attributes || {};
 		}
 	} catch (e) {

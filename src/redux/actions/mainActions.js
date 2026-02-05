@@ -1,5 +1,21 @@
 import * as types from "redux/constants";
 
+const deleteBot = (botId) => ({
+	type: types.DELETE_BOT,
+	botId,
+});
+
+const editBot = (botId, payload) => ({
+	type: types.EDIT_BOT,
+	botId,
+	payload,
+});
+
+const upsertBot = (bot) => ({
+	type: types.UPSERT_BOT,
+	bot,
+});
+
 const setSSRStoreMain = (payload) => ({
 	type: types.SET_SSR_STORE_MAIN,
 	payload,
@@ -30,4 +46,4 @@ const setInitialValues = () => ({
 	type: types.SET_INITIAL_VALUES,
 });
 
-export { setInitialValues, setIsAuth, setIsActive, setIsMobile, setSSRStoreMain, setUser };
+export { deleteBot, editBot, upsertBot, setInitialValues, setIsAuth, setIsActive, setIsMobile, setSSRStoreMain, setUser };

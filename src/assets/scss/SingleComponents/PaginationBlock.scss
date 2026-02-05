@@ -1,55 +1,105 @@
+@import "../colors.scss";
+
 .pagination {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-top: 20px;
-	position: absolute;
-	bottom: 20px;
-	left: 50%;
-	transform: translateX(-50%);
-	width: calc(100% - 20px);
+	position: relative;
+	width: 100%;
+
+	&.pagination-absolute {
+		position: absolute;
+		bottom: 20px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: calc(100% - 20px);
+	}
 
 	.pagination-info {
 		font-family: JuraRegular, sans-serif;
-		font-size: 16px;
-		color: #ffffff;
-		text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+		font-size: 14px;
+		color: $text-gray-color;
+		text-shadow: none;
 		user-select: none;
+
+		.pagination-absolute & {
+			font-size: 16px;
+			color: $white;
+			text-shadow: 1px 1px 3px $black-transparent-dark;
+		}
 	}
 
 	.pagination-btn {
-		min-width: 90px;
-		padding: 6px 16px;
-		border-radius: 20px;
-		-webkit-backdrop-filter: blur(25px);
-		backdrop-filter: blur(25px);
-		box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.4), inset 5px 5px 8px rgba(255, 255, 255, 0.3), inset -7px -7px 10px rgba(0, 0, 0, 0.4);
-		border: solid 2px #b6dbe2;
-		background-color: rgba(29, 29, 29, 0.7);
-		font-family: JuraBold, sans-serif;
-		font-size: 16px;
-		color: #fff;
+		min-width: 80px;
+		padding: 6px 12px;
+		border-radius: 6px;
+		border: 1px solid $border-color;
+		background-color: $button-background-color;
+		font-family: JuraSemiBold, sans-serif;
+		font-size: 14px;
+		color: $text-white-color;
 		cursor: pointer;
 		user-select: none;
 		transition: all 0.2s ease;
 		text-align: center;
+		outline: none;
+		backdrop-filter: none;
+		-webkit-backdrop-filter: none;
+		box-shadow: none;
 
-		&:hover {
-			transform: translateY(-2px);
-			box-shadow: 12px 12px 17px rgba(0, 0, 0, 0.5), inset 4px 4px 6px rgba(255, 255, 255, 0.3), inset -9px -9px 12px rgba(0, 0, 0, 0.5);
+		.pagination-absolute & {
+			min-width: 90px;
+			padding: 6px 16px;
+			border-radius: 20px;
+			-webkit-backdrop-filter: blur(25px);
+			backdrop-filter: blur(25px);
+			box-shadow: 10px 10px 15px $black-transparent-light, inset 5px 5px 8px $white-transparent-medium, inset -7px -7px 10px $black-transparent-light;
+			border: solid 2px $cyan-light;
+			background-color: $gray-dark-transparent;
+			font-family: JuraBold, sans-serif;
+			font-size: 16px;
+			color: $white;
 		}
 
-		&:active {
-			transform: translateY(2px);
-			box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4), inset 6px 6px 6px rgba(0, 0, 0, 0.3), inset -5px -5px 10px rgba(0, 0, 0, 0.5);
+		&:hover:not(.disabled) {
+			background-color: lighten($button-background-color, 5%);
+			border-color: $button-hover-color;
+			transform: none;
+
+			.pagination-absolute & {
+				transform: translateY(-2px);
+				box-shadow: 12px 12px 17px $black-transparent-medium-2, inset 4px 4px 6px $white-transparent-medium, inset -9px -9px 12px $black-transparent-medium-2;
+			}
+		}
+
+		&:active:not(.disabled) {
+			background-color: darken($button-background-color, 5%);
+			transform: none;
+
+			.pagination-absolute & {
+				transform: translateY(2px);
+				box-shadow: 5px 5px 10px $black-transparent-light, inset 6px 6px 6px $black-transparent-shadow-3, inset -5px -5px 10px $black-transparent-medium-2;
+			}
+		}
+
+		&:focus {
+			outline: none;
 		}
 
 		&.disabled {
-			background-color: rgba(80, 80, 80, 0.5);
-			color: rgba(200, 200, 200, 0.6);
+			background-color: $button-background-color;
+			color: $white-transparent-disabled;
 			cursor: not-allowed;
 			pointer-events: none;
-			box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3), inset 5px 5px 8px rgba(0, 0, 0, 0.2), inset -5px -5px 8px rgba(0, 0, 0, 0.3);
+			opacity: 0.5;
+			box-shadow: none;
+
+			.pagination-absolute & {
+				background-color: $gray-medium-transparent;
+				color: $gray-light-transparent;
+				box-shadow: 5px 5px 10px $black-transparent-shadow-3, inset 5px 5px 8px $black-transparent-shadow-2, inset -5px -5px 8px $black-transparent-shadow-3;
+			}
 		}
 	}
 }

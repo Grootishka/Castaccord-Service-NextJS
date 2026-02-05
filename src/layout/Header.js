@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { setIsMobile } from "redux/actions/mainActions";
 import { useTranslation } from "next-i18next";
 import NavBar from "components/Header/NavBar";
+import LanguageSwitcher from "components/Header/LanguageSwitcher";
 
 import "assets/scss/layout/Header/Header.scss";
 
@@ -55,13 +56,16 @@ const Header = ({ isAuth }) => {
 						</div>
 					</div>
 					{isAuth && <NavBar />}
-					{!isAuth && (
-						<div className="login-block">
-							<div className="login-button" onClick={handleLoginClick}>
-								<p className="login-button-text">{header?.login || ""}</p>
+					<div className="header-right-block">
+						<LanguageSwitcher />
+						{!isAuth && (
+							<div className="login-block">
+								<div className="login-button" onClick={handleLoginClick}>
+									<p className="login-button-text">{header?.login || ""}</p>
+								</div>
 							</div>
-						</div>
-					)}
+						)}
+					</div>
 				</div>
 			</Container>
 		</div>

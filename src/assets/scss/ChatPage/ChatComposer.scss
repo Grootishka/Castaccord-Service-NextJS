@@ -14,10 +14,11 @@
 		.chat-composer-left {
 			display: flex;
 			align-items: center;
-			gap: 8px;
 			flex-wrap: wrap;
 
 			.chat-composer-bot {
+				margin-right: 8px;
+
 				.chat-composer-bot-label {
 					font-size: 12px;
 					color: $text-gray-color;
@@ -32,14 +33,18 @@
 					margin: 0;
 				}
 			}
+
+			.reply-mode-indicator {
+				margin-right: 8px;
+			}
 		}
 
 		.chat-composer-right {
 			display: flex;
 			align-items: center;
-			gap: 8px;
 
 			.chat-composer-mode {
+				margin-right: 8px;
 				padding: 8px 14px;
 				border-radius: 10px;
 				border: 1px solid $border-color;
@@ -98,7 +103,7 @@
 		transition: border-color 0.2s linear;
 
 		&::placeholder {
-			color: rgba(255, 255, 255, 0.35);
+			color: $text-placeholder-color;
 		}
 
 		&:focus {
