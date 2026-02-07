@@ -517,24 +517,10 @@ const Chat = () => {
 
 					<div className="chat-stream-block">
 						<ChatStream channelName={channelName} parentDomain={parentDomain} />
-						<ChatComposer
-							chat={chat}
-							message={message}
-							setMessage={setMessage}
-							onKeyDown={onKeyDown}
-							sendingAsText={sendingAsText}
-							replyMode={replyMode}
-							setReplyMode={setReplyMode}
-							isAutoMode={isAutoMode}
-							textareaRef={textareaRef}
-							onToggleBots={onToggleBots}
-							hideBotsText={hideBotsText}
-							onSendPreparedMessage={sendPreparedMessage}
-							channelName={channelName}
-						/>
+						<ChatComposer chat={chat} message={message} setMessage={setMessage} onKeyDown={onKeyDown} sendingAsText={sendingAsText} replyMode={replyMode} setReplyMode={setReplyMode} textareaRef={textareaRef} onToggleBots={onToggleBots} hideBotsText={hideBotsText} onSendPreparedMessage={sendPreparedMessage} channelName={channelName} />
 					</div>
 
-					{!isBotsCollapsed && <ChatBotsList chat={chat} botsViewModels={botsViewModels} botSearchQuery={botSearchQuery} setBotSearchQuery={setBotSearchQuery} onSelectBot={onSelectBot} activeBotsCount={activeBots.length} />}
+					{!isBotsCollapsed && <ChatBotsList chat={chat} botsViewModels={botsViewModels} botSearchQuery={botSearchQuery} setBotSearchQuery={setBotSearchQuery} onSelectBot={onSelectBot} activeBotsCount={activeBots.length} isAutoMode={isAutoMode} />}
 				</div>
 			</div>
 		</div>

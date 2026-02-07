@@ -40,6 +40,17 @@
 			color: $text-gray-color;
 			font-family: JuraSemiBold, sans-serif;
 		}
+
+		.chat-bots-mode-label {
+			padding: 8px 14px;
+			border-radius: 10px;
+			border: 1px solid $border-color;
+			background-color: $button-background-color;
+			color: $text-white-color;
+			font-family: JuraBold, sans-serif;
+			font-size: 14px;
+			text-transform: capitalize;
+		}
 	}
 
 	.chat-bots-search {
