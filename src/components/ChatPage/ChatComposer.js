@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import ReplyModeIndicator from "components/ChatPage/ReplyModeIndicator";
 import PreparedMessages from "components/ChatPage/PreparedMessages";
 import useStreamTimer from "hooks/useStreamTimer";
+import ViewerIcon from "assets/img/icons/Viewer";
 
 import "assets/scss/ChatPage/ChatComposer.scss";
 
 const ChatComposer = ({ chat, message, setMessage, onKeyDown, sendingAsText, replyMode, setReplyMode, isAutoMode, textareaRef, onToggleBots, hideBotsText, onSendPreparedMessage, channelName }) => {
-	const { isLive, streamDuration } = useStreamTimer(channelName);
+	const { isLive, streamDuration, viewers } = useStreamTimer(channelName);
 
 	return (
 		<div className="chat-composer-block">
@@ -21,9 +22,17 @@ const ChatComposer = ({ chat, message, setMessage, onKeyDown, sendingAsText, rep
 				</div>
 
 				{isLive && (
-					<div className="chat-composer-timer">
-						<span className="chat-composer-timer-label">LIVE</span>
-						<span className="chat-composer-timer-value">{streamDuration}</span>
+					<div className="chat-composer-timer-wrapper">
+						<div className="chat-composer-timer">
+							<span className="chat-composer-timer-label">LIVE</span>
+							<span className="chat-composer-timer-value">{streamDuration}</span>
+						</div>
+						{viewers !== null && (
+							<div className="chat-composer-viewers">
+								<ViewerIcon className="chat-composer-viewers-icon" width={14} height={14} />
+								<span className="chat-composer-viewers-value">{viewers.toLocaleString()}</span>
+							</div>
+						)}
 					</div>
 				)}
 
