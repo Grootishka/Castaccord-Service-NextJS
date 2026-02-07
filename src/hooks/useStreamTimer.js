@@ -5,6 +5,7 @@ const STREAM_CHECK_INTERVAL = 30000;
 const useStreamTimer = (channelName) => {
 	const [isLive, setIsLive] = useState(false);
 	const [streamDuration, setStreamDuration] = useState(0);
+	const [viewers, setViewers] = useState(null);
 	const intervalRef = useRef(null);
 	const timerRef = useRef(null);
 	const baseDurationRef = useRef(0);
@@ -21,16 +22,22 @@ const useStreamTimer = (channelName) => {
 		if (!channelName) return;
 
 		try {
-			const response = await fetch(`https://decapi.me/twitch/uptime/${channelName}`, {
-				method: "GET",
-			});
+			const [uptimeResponse, viewersResponse] = await Promise.all([
+				fetch(`https://decapi.me/twitch/uptime/${channelName}`, {
+					method: "GET",
+				}),
+				fetch(`https://decapi.me/twitch/viewercount/${channelName}`, {
+					method: "GET",
+				}).catch(() => null),
+			]);
 
-			if (!response.ok) {
+			if (!uptimeResponse.ok) {
 				setIsLive((prevIsLive) => {
 					if (prevIsLive) {
 						baseDurationRef.current = 0;
 						lastUpdateTimeRef.current = null;
 						setStreamDuration(0);
+						setViewers(null);
 						return false;
 					}
 					return false;
@@ -38,8 +45,24 @@ const useStreamTimer = (channelName) => {
 				return;
 			}
 
-			const text = await response.text();
-			const trimmedText = text.trim().toLowerCase();
+			const uptimeText = await uptimeResponse.text();
+			const trimmedText = uptimeText.trim().toLowerCase();
+
+			let viewersCount = null;
+			if (viewersResponse && viewersResponse.ok) {
+				try {
+					const viewersText = await viewersResponse.text();
+					const trimmedViewers = viewersText.trim().toLowerCase();
+					if (trimmedViewers && trimmedViewers !== "offline" && trimmedViewers !== "not found" && trimmedViewers !== "404 page not found") {
+						const viewersMatch = trimmedViewers.match(/(\d+)/);
+						if (viewersMatch) {
+							viewersCount = parseInt(viewersMatch[1], 10);
+						}
+					}
+				} catch (error) {
+					// Ignore viewers parsing errors
+				}
+			}
 
 			if (trimmedText && trimmedText !== "offline" && trimmedText !== "not found") {
 				let totalSeconds = 0;
@@ -71,9 +94,11 @@ const useStreamTimer = (channelName) => {
 					setIsLive((prevIsLive) => {
 						if (!prevIsLive) {
 							setStreamDuration(totalSeconds);
+							setViewers(viewersCount);
 							return true;
 						}
 						setStreamDuration(totalSeconds);
+						setViewers(viewersCount);
 						return true;
 					});
 					return;
@@ -85,6 +110,7 @@ const useStreamTimer = (channelName) => {
 					baseDurationRef.current = 0;
 					lastUpdateTimeRef.current = null;
 					setStreamDuration(0);
+					setViewers(null);
 					return false;
 				}
 				return false;
@@ -143,6 +169,7 @@ const useStreamTimer = (channelName) => {
 	return {
 		isLive,
 		streamDuration: formatTime(streamDuration),
+		viewers,
 	};
 };
 
