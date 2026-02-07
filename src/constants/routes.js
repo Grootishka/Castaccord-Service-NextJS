@@ -160,29 +160,29 @@ const ChatPopoutRoute = {
 };
 
 const BotsListRoute = {
-	path: "/bots-list",
+	path: "/tokens-list",
 	accessType: "onlyAuth",
 	helmet: {
 		en: {
-			title: "Bots List",
-			description: "Bots list on the platform.",
-			keywords: "bots, list, platform",
+			title: "Tokens List",
+			description: "Tokens list on the platform.",
+			keywords: "tokens, list, platform",
 			noIndex: false,
 			noFollow: false,
 			hasQuery: false,
 		},
 		ru: {
-			title: "Список ботов",
-			description: "Список ботов на платформе.",
-			keywords: "боты, список, платформа",
+			title: "Список токенов",
+			description: "Список токенов на платформе.",
+			keywords: "токены, список, платформа",
 			noIndex: false,
 			noFollow: false,
 			hasQuery: false,
 		},
 		ua: {
-			title: "Список ботів",
-			description: "Список ботів на платформі.",
-			keywords: "боти, список, платформа",
+			title: "Список токенів",
+			description: "Список токенів на платформі.",
+			keywords: "токены, список, платформа",
 			noIndex: false,
 			noFollow: false,
 			hasQuery: false,

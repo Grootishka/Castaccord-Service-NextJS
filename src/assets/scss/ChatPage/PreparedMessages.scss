@@ -83,6 +83,18 @@
                     outline: none;
                 }
             }
+
+            &.prepared-message-collection-edit-mode {
+                background-color: rgba(119, 44, 232, 0.15);
+                border-color: rgba(119, 44, 232, 0.5);
+                box-shadow: 0 0 8px rgba(119, 44, 232, 0.3);
+
+                &:hover {
+                    background-color: rgba(119, 44, 232, 0.25);
+                    border-color: $purple;
+                    box-shadow: 0 0 12px rgba(119, 44, 232, 0.4);
+                }
+            }
         }
     }
 }

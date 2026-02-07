@@ -1,50 +1,51 @@
 {
-	"title": "Список ботов",
-	"searchPlaceholder": "Поиск по имени, ID или статусу...",
+	"title": "Список токенов",
+	"searchPlaceholder": "Поиск по имени пользователя, ID или статусу...",
 	"tableHeaders": {
-		"icon": "Значок",
-		"username": "Имя пользователя",
-		"color": "Цвет",
-		"status": "Статус",
-		"actions": "Действия"
+	  "icon": "Иконка",
+	  "username": "Имя пользователя",
+	  "color": "Цвет",
+	  "status": "Статус",
+	  "actions": "Действия"
 	},
 	"status": {
-		"active": "активный",
-		"banned": "заблокирован",
-		"invalid": "недействительный",
-		"pending": "в обработке"
+	  "active": "активен",
+	  "banned": "заблокирован",
+	  "invalid": "недействителен",
+	  "pending": "в ожидании"
 	},
 	"actions": {
-		"edit": "Редактировать",
-		"delete": "Удалить"
+	  "edit": "Редактировать",
+	  "delete": "Удалить"
 	},
-	"empty": "Боты не найдены",
+	"empty": "Токены не найдены",
 	"footer": {
-		"totalWithCount": "Всего: {{count}} бот",
-		"totalWithCountPlural": "Всего: {{count}} ботов",
-		"totalActive": "Всего активных ботов: {{count}}",
-		"totalActivePlural": "Всего активных ботов: {{count}}",
-		"totalBanned": "Всего заблокированных ботов: {{count}}",
-		"totalBannedPlural": "Всего заблокированных ботов: {{count}}",
-		"totalInvalid": "Всего недействительных ботов: {{count}}",
-		"totalInvalidPlural": "Всего недействительных ботов: {{count}}",
-		"totalPending": "Всего ботов в обработке: {{count}}",
-		"totalPendingPlural": "Всего ботов в обработке: {{count}}"
+	  "totalWithCount": "Всего: {{count}} токен",
+	  "totalWithCountPlural": "Всего: {{count}} токенов",
+	  "totalActive": "Активных токенов: {{count}}",
+	  "totalActivePlural": "Активных токенов: {{count}}",
+	  "totalBanned": "Заблокированных токенов: {{count}}",
+	  "totalBannedPlural": "Заблокированных токенов: {{count}}",
+	  "totalInvalid": "Недействительных токенов: {{count}}",
+	  "totalInvalidPlural": "Недействительных токенов: {{count}}",
+	  "totalPending": "Токенов в ожидании: {{count}}",
+	  "totalPendingPlural": "Токенов в ожидании: {{count}}"
 	},
 	"messages": {
-		"updateError": "Не удалось обновить бота"
+	  "updateError": "Не удалось обновить токен"
 	},
 	"editModal": {
-		"title": "Редактировать бота",
-		"icon": "Значок",
-		"color": "Цвет",
-		"save": "Сохранить",
-		"saving": "Сохранение...",
-		"cancel": "Отмена"
+	  "title": "Редактирование токена",
+	  "icon": "Иконка",
+	  "color": "Цвет",
+	  "save": "Сохранить",
+	  "saving": "Сохранение...",
+	  "cancel": "Отмена"
 	},
-	"botFallbackName": "Бот #{{id}}",
+	"botFallbackName": "Токен №{{id}}",
 	"warning": {
-		"title": "Важно",
-		"message": "После сохранения изменения могут примениться не сразу — обычно 5–15 секунд."
+	  "title": "Важно",
+	  "message": "После сохранения изменения могут примениться не сразу — обычно в течение 5–15 секунд."
 	}
-}
+  }
+  

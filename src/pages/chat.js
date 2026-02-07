@@ -40,8 +40,8 @@ const Chat = () => {
 	const messagesEndRef = useRef(null);
 	const textareaRef = useRef(null);
 
-	const channelName = user?.broadcaster_username;
-	const parentDomain = "castaccord.com";
+	const channelName = "grootishka_"; // user?.broadcaster_username;
+	const parentDomain = "localhost"; // "castaccord.com";
 
 	const availableBots = useMemo(() => {
 		const list = Array.isArray(botAccounts) ? botAccounts : [];
@@ -191,6 +191,12 @@ const Chat = () => {
 		chat,
 	});
 
+	useEffect(() => {
+		if (channelName && ircConnectionState === "disconnected") {
+			connectIRC();
+		}
+	}, [channelName, ircConnectionState, connectIRC]);
+
 	const onToggleBots = () => setIsBotsCollapsed((v) => !v);
 
 	const onSelectBot = (botId) => {
@@ -217,7 +223,7 @@ const Chat = () => {
 				return;
 			}
 
-			const botIdToUse = nextRandomBotId();
+			const botIdToUse = isAutoMode ? previewBotId : selectedBotId;
 			if (!botIdToUse) {
 				toast.error(chat?.noBotSelected);
 				focusTextArea();
@@ -241,15 +247,11 @@ const Chat = () => {
 
 			if (response && response.success === false) {
 				toast.error(response.error || chat?.replyFailed);
-				const newBotId = nextRandomBotId();
-				if (newBotId) {
-					setPreviewBotId(newBotId);
-				}
-				setSelectedBotId(null);
 				focusTextArea();
 				return;
 			}
 
+			lastUsedBotIdRef.current = botIdToUse;
 			const newBotId = nextRandomBotId();
 			if (newBotId) {
 				setPreviewBotId(newBotId);
@@ -259,11 +261,6 @@ const Chat = () => {
 			focusTextArea();
 		} catch (e) {
 			console.error("Error sending reply:", e);
-			const newBotId = nextRandomBotId();
-			if (newBotId) {
-				setPreviewBotId(newBotId);
-			}
-			setSelectedBotId(null);
 			focusTextArea();
 		} finally {
 			setIsLoading(false);
@@ -296,7 +293,7 @@ const Chat = () => {
 				return;
 			}
 
-			const botIdToUse = nextRandomBotId();
+			const botIdToUse = isAutoMode ? previewBotId : selectedBotId;
 			if (!botIdToUse) {
 				toast.error(chat?.noBotSelected);
 				focusTextArea();
@@ -318,15 +315,11 @@ const Chat = () => {
 
 			if (response && response.success === false) {
 				toast.error(response.error || chat?.sendFailed);
-				const newBotId = nextRandomBotId();
-				if (newBotId) {
-					setPreviewBotId(newBotId);
-				}
-				setSelectedBotId(null);
 				focusTextArea();
 				return;
 			}
 
+			lastUsedBotIdRef.current = botIdToUse;
 			const newBotId = nextRandomBotId();
 			if (newBotId) {
 				setPreviewBotId(newBotId);
@@ -336,11 +329,6 @@ const Chat = () => {
 			focusTextArea();
 		} catch (e) {
 			console.error("Error sending message:", e);
-			const newBotId = nextRandomBotId();
-			if (newBotId) {
-				setPreviewBotId(newBotId);
-			}
-			setSelectedBotId(null);
 			focusTextArea();
 		} finally {
 			setIsLoading(false);
@@ -374,7 +362,7 @@ const Chat = () => {
 				return;
 			}
 
-			const botIdToUse = nextRandomBotId();
+			const botIdToUse = isAutoMode ? previewBotId : selectedBotId;
 			if (!botIdToUse) {
 				toast.error(chat?.noBotSelected);
 				focusTextArea();
@@ -394,15 +382,11 @@ const Chat = () => {
 
 			if (response && response.success === false) {
 				toast.error(response.error || chat?.sendFailed);
-				const newBotId = nextRandomBotId();
-				if (newBotId) {
-					setPreviewBotId(newBotId);
-				}
-				setSelectedBotId(null);
 				focusTextArea();
 				return;
 			}
 
+			lastUsedBotIdRef.current = botIdToUse;
 			const newBotId = nextRandomBotId();
 			if (newBotId) {
 				setPreviewBotId(newBotId);
@@ -412,11 +396,6 @@ const Chat = () => {
 			focusTextArea();
 		} catch (e) {
 			console.error("Error sending prepared message:", e);
-			const newBotId = nextRandomBotId();
-			if (newBotId) {
-				setPreviewBotId(newBotId);
-			}
-			setSelectedBotId(null);
 			focusTextArea();
 		} finally {
 			setIsLoading(false);
@@ -538,7 +517,21 @@ const Chat = () => {
 
 					<div className="chat-stream-block">
 						<ChatStream channelName={channelName} parentDomain={parentDomain} />
-						<ChatComposer chat={chat} message={message} setMessage={setMessage} onKeyDown={onKeyDown} sendingAsText={sendingAsText} replyMode={replyMode} setReplyMode={setReplyMode} isAutoMode={isAutoMode} textareaRef={textareaRef} onToggleBots={onToggleBots} hideBotsText={hideBotsText} onSendPreparedMessage={sendPreparedMessage} />
+						<ChatComposer
+							chat={chat}
+							message={message}
+							setMessage={setMessage}
+							onKeyDown={onKeyDown}
+							sendingAsText={sendingAsText}
+							replyMode={replyMode}
+							setReplyMode={setReplyMode}
+							isAutoMode={isAutoMode}
+							textareaRef={textareaRef}
+							onToggleBots={onToggleBots}
+							hideBotsText={hideBotsText}
+							onSendPreparedMessage={sendPreparedMessage}
+							channelName={channelName}
+						/>
 					</div>
 
 					{!isBotsCollapsed && <ChatBotsList chat={chat} botsViewModels={botsViewModels} botSearchQuery={botSearchQuery} setBotSearchQuery={setBotSearchQuery} onSelectBot={onSelectBot} activeBotsCount={activeBots.length} />}

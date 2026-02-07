@@ -1,8 +1,8 @@
 {
   "content": {
     "hero": {
-      "title": "Manage Your Twitch Chat with AI-Powered Bots",
-      "subtitle": "Streamline your streaming experience with intelligent bot management, prepared messages, and automated chat interactions. Take control of your Twitch channel like never before.",
+      "title": "Manage Your Twitch Chat with AI-Powered Tokens",
+      "subtitle": "Streamline your streaming experience with intelligent token management, prepared messages, and automated chat interactions. Take control of your Twitch channel like never before.",
       "ctaPrimary": "Get Started",
       "ctaSecondary": "Connect Twitch"
     },
@@ -10,8 +10,8 @@
     "features": [
       {
         "iconPath": "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5",
-        "title": "Bot Management",
-        "description": "Easily manage multiple bot accounts with custom colors, icons, and nicknames. Organize and control all your bots from one convenient dashboard."
+        "title": "Token Management",
+        "description": "Easily manage multiple token accounts with custom colors, icons, and nicknames. Organize and control all your tokens from one convenient dashboard."
       },
       {
         "iconPath": "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
@@ -21,7 +21,7 @@
       {
         "iconPath": "M13 2L3 14h9l-1 8 10-12h-9l1-8z",
         "title": "Auto & Manual Modes",
-        "description": "Switch between automatic bot selection and manual control. Let the system choose bots automatically or pick them yourself for full control."
+        "description": "Switch between automatic token selection and manual control. Let the system choose tokens automatically or pick them yourself for full control."
       },
       {
         "iconPath": "M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z",
@@ -31,7 +31,7 @@
       {
         "iconPath": "M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6",
         "title": "Customization",
-        "description": "Personalize your bots with custom colors and badges. Make each bot unique and easily recognizable in your chat."
+        "description": "Personalize your tokens with custom colors and badges. Make each token unique and easily recognizable in your chat."
       },
       {
         "iconPath": "M3 3v18h18M7 16l4-4 4 4 6-6",
@@ -43,11 +43,11 @@
     "benefits": [
       {
         "title": "Save Time",
-        "description": "Automate repetitive tasks and focus on creating great content. Our intelligent bot system handles the heavy lifting so you can concentrate on streaming."
+        "description": "Automate repetitive tasks and focus on creating great content. Our intelligent token system handles the heavy lifting so you can concentrate on streaming."
       },
       {
         "title": "Professional Management",
-        "description": "Organize and manage all your bot accounts professionally. With our intuitive interface, managing multiple bots has never been easier."
+        "description": "Organize and manage all your token accounts professionally. With our intuitive interface, managing multiple tokens has never been easier."
       },
       {
         "title": "Enhanced Engagement",
@@ -55,22 +55,22 @@
       },
       {
         "title": "Full Control",
-        "description": "Switch between automatic and manual modes anytime. You're always in control of when and how your bots interact with your audience."
+        "description": "Switch between automatic and manual modes anytime. You're always in control of when and how your tokens interact with your audience."
       }
     ],
     "faqTitle": "Frequently Asked Questions",
     "faq": [
       {
         "question": "What is Castaccord?",
-        "answer": "Castaccord is a comprehensive Twitch chat management platform that helps streamers manage multiple bot accounts, create prepared message collections, and automate chat interactions. It provides both automatic and manual control modes for maximum flexibility."
+        "answer": "Castaccord is a comprehensive Twitch chat management platform that helps streamers manage multiple token accounts, create prepared message collections, and automate chat interactions. It provides both automatic and manual control modes for maximum flexibility."
       },
       {
         "question": "How do I get started?",
-        "answer": "Getting started is easy! Simply connect your Twitch account, import your bot tokens, and you're ready to go. Our intuitive interface guides you through the setup process step by step."
+        "answer": "Getting started is easy! Simply connect your Twitch account, import your token tokens, and you're ready to go. Our intuitive interface guides you through the setup process step by step."
       },
       {
-        "question": "Can I customize my bots?",
-        "answer": "Absolutely! You can customize each bot with unique colors, icons (badges), and nicknames. This makes it easy to identify and manage different bots in your chat."
+        "question": "Can I customize my tokens?",
+        "answer": "Absolutely! You can customize each token with unique colors, icons (badges), and nicknames. This makes it easy to identify and manage different tokens in your chat."
       },
       {
         "question": "What are prepared message collections?",
@@ -78,11 +78,11 @@
       },
       {
         "question": "Is there a free trial?",
-        "answer": "Yes! You can start using Castaccord right away. Connect your Twitch account and begin managing your bots immediately with our free tier."
+        "answer": "Yes! You can start using Castaccord right away. Connect your Twitch account and begin managing your tokens immediately with our free tier."
       },
       {
         "question": "How secure is my data?",
-        "answer": "Security is our top priority. All your bot tokens and account information are encrypted and stored securely. We follow industry best practices to protect your data."
+        "answer": "Security is our top priority. All your token tokens and account information are encrypted and stored securely. We follow industry best practices to protect your data."
       }
     ],
     "cta": {

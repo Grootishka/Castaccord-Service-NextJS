@@ -1,9 +1,10 @@
 {
     "content": {
-        "title": "Вход",
-        "description": "Используйте вашу электронную почту и пароль для входа",
-        "emailPlaceholder": "Электронная почта",
-        "passwordPlaceholder": "Пароль",
-        "buttonText": "Вход"
+      "title": "Вход",
+      "description": "Войдите с помощью email и пароля",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Пароль",
+      "buttonText": "Войти"
     }
-}
+  }
+  
