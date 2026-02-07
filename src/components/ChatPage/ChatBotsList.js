@@ -4,7 +4,7 @@ import PaginationBlock from "components/SingleComponents/PaginationBlock";
 
 import "assets/scss/ChatPage/ChatBotsList.scss";
 
-const ChatBotsList = ({ chat, botsViewModels, botSearchQuery, setBotSearchQuery, onSelectBot, activeBotsCount }) => {
+const ChatBotsList = ({ chat, botsViewModels, botSearchQuery, setBotSearchQuery, onSelectBot, activeBotsCount, isAutoMode }) => {
 	const [animatedPlaceholder, setAnimatedPlaceholder] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
 	const itemsPerPage = 10;
@@ -69,6 +69,7 @@ const ChatBotsList = ({ chat, botsViewModels, botSearchQuery, setBotSearchQuery,
 					<p className="chat-panel-title">{chat?.botsTitle || ""}</p>
 					{activeBotsCount > 0 && <span className="chat-panel-title-count">({activeBotsCount})</span>}
 				</div>
+				<div className="chat-bots-mode-label">{isAutoMode ? chat?.autoMode : chat?.manualMode}</div>
 			</div>
 
 			<div className="chat-bots-search">
@@ -124,6 +125,7 @@ ChatBotsList.propTypes = {
 	setBotSearchQuery: PropTypes.func.isRequired,
 	onSelectBot: PropTypes.func.isRequired,
 	activeBotsCount: PropTypes.number.isRequired,
+	isAutoMode: PropTypes.bool.isRequired,
 };
 
 export default ChatBotsList;

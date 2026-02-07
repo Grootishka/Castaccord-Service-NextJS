@@ -117,20 +117,6 @@
 			flex: 1;
 			justify-content: flex-end;
 
-			.chat-composer-mode {
-				margin-right: 8px;
-				padding: 8px 14px;
-				border-radius: 10px;
-				border: 1px solid $border-color;
-
-				background-color: $button-background-color;
-				color: $text-white-color;
-
-				font-family: JuraBold, sans-serif;
-				font-size: 14px;
-				text-transform: capitalize;
-			}
-
 			.chat-composer-hide-bots-button {
 				padding: 8px 14px;
 				border-radius: 10px;
