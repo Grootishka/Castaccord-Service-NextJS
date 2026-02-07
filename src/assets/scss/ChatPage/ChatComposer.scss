@@ -53,6 +53,8 @@
 			border-radius: 6px;
 			backdrop-filter: blur(10px);
 			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+			min-width: 120px;
+			justify-content: center;
 
 			.chat-composer-timer-label {
 				color: $text-white-color;
@@ -61,6 +63,7 @@
 				font-family: JuraBold, sans-serif;
 				letter-spacing: 0.5px;
 				text-transform: uppercase;
+				flex-shrink: 0;
 			}
 
 			.chat-composer-timer-value {
@@ -69,6 +72,8 @@
 				font-weight: 600;
 				font-family: JuraSemiBold, sans-serif;
 				font-variant-numeric: tabular-nums;
+				min-width: 60px;
+				text-align: center;
 			}
 		}
 
