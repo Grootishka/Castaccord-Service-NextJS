@@ -1,15 +1,14 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
 const STREAM_CHECK_INTERVAL = 30000;
-const TWITCH_API_URL = "https://api.twitch.tv/helix/streams";
 
 const useStreamTimer = (channelName) => {
 	const [isLive, setIsLive] = useState(false);
 	const [streamDuration, setStreamDuration] = useState(0);
-	const [streamStartTime, setStreamStartTime] = useState(null);
 	const intervalRef = useRef(null);
 	const timerRef = useRef(null);
-	const streamStartTimeRef = useRef(null);
+	const baseDurationRef = useRef(0);
+	const lastUpdateTimeRef = useRef(null);
 
 	const formatTime = (seconds) => {
 		const hours = Math.floor(seconds / 3600);
@@ -22,44 +21,69 @@ const useStreamTimer = (channelName) => {
 		if (!channelName) return;
 
 		try {
-			const response = await fetch(`${TWITCH_API_URL}?user_login=${channelName}`, {
+			const response = await fetch(`https://decapi.me/twitch/uptime/${channelName}`, {
 				method: "GET",
-				headers: {
-					"Client-ID": "kimne78kx3ncx6br4t3ngy89h46ko",
-				},
 			});
 
 			if (!response.ok) {
-				return;
-			}
-
-			const data = await response.json();
-			const stream = data?.data?.[0];
-
-			if (stream && stream.type === "live") {
-				const startedAt = new Date(stream.started_at);
-				const startedAtTime = startedAt.getTime();
-
 				setIsLive((prevIsLive) => {
-					if (!prevIsLive) {
-						streamStartTimeRef.current = startedAt;
-						setStreamStartTime(startedAt);
+					if (prevIsLive) {
+						baseDurationRef.current = 0;
+						lastUpdateTimeRef.current = null;
 						setStreamDuration(0);
-						return true;
+						return false;
 					}
-					if (streamStartTimeRef.current && streamStartTimeRef.current.getTime() !== startedAtTime) {
-						streamStartTimeRef.current = startedAt;
-						setStreamStartTime(startedAt);
-						setStreamDuration(0);
-					}
-					return true;
+					return false;
 				});
 				return;
 			}
+
+			const text = await response.text();
+			const trimmedText = text.trim().toLowerCase();
+
+			if (trimmedText && trimmedText !== "offline" && trimmedText !== "not found") {
+				let totalSeconds = 0;
+
+				if (trimmedText.includes(":")) {
+					const parts = trimmedText.split(":");
+					if (parts.length >= 3) {
+						const hours = parseInt(parts[0], 10) || 0;
+						const minutes = parseInt(parts[1], 10) || 0;
+						const seconds = parseInt(parts[2], 10) || 0;
+						totalSeconds = hours * 3600 + minutes * 60 + seconds;
+					}
+				} else if (trimmedText.includes("minute") || trimmedText.includes("second") || trimmedText.includes("hour")) {
+					const hourMatch = trimmedText.match(/(\d+)\s*hour/);
+					const minuteMatch = trimmedText.match(/(\d+)\s*minute/);
+					const secondMatch = trimmedText.match(/(\d+)\s*second/);
+
+					const hours = hourMatch ? parseInt(hourMatch[1], 10) : 0;
+					const minutes = minuteMatch ? parseInt(minuteMatch[1], 10) : 0;
+					const seconds = secondMatch ? parseInt(secondMatch[1], 10) : 0;
+
+					totalSeconds = hours * 3600 + minutes * 60 + seconds;
+				}
+
+				if (totalSeconds > 0) {
+					baseDurationRef.current = totalSeconds;
+					lastUpdateTimeRef.current = new Date();
+
+					setIsLive((prevIsLive) => {
+						if (!prevIsLive) {
+							setStreamDuration(totalSeconds);
+							return true;
+						}
+						setStreamDuration(totalSeconds);
+						return true;
+					});
+					return;
+				}
+			}
+
 			setIsLive((prevIsLive) => {
 				if (prevIsLive) {
-					streamStartTimeRef.current = null;
-					setStreamStartTime(null);
+					baseDurationRef.current = 0;
+					lastUpdateTimeRef.current = null;
 					setStreamDuration(0);
 					return false;
 				}
@@ -87,12 +111,13 @@ const useStreamTimer = (channelName) => {
 	}, [channelName, checkStreamStatus]);
 
 	useEffect(() => {
-		if (isLive && streamStartTime) {
+		if (isLive && baseDurationRef.current > 0 && lastUpdateTimeRef.current) {
 			const updateTimer = () => {
-				if (streamStartTimeRef.current) {
+				if (lastUpdateTimeRef.current) {
 					const now = new Date();
-					const diff = Math.floor((now - streamStartTimeRef.current) / 1000);
-					setStreamDuration(diff);
+					const timeSinceUpdate = Math.floor((now - lastUpdateTimeRef.current) / 1000);
+					const currentDuration = baseDurationRef.current + timeSinceUpdate;
+					setStreamDuration(currentDuration);
 				}
 			};
 
@@ -110,8 +135,10 @@ const useStreamTimer = (channelName) => {
 			clearInterval(timerRef.current);
 			timerRef.current = null;
 		}
-		setStreamDuration(0);
-	}, [isLive, streamStartTime]);
+		if (!isLive) {
+			setStreamDuration(0);
+		}
+	}, [isLive]);
 
 	return {
 		isLive,
