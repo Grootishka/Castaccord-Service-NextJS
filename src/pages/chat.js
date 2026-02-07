@@ -40,8 +40,8 @@ const Chat = () => {
 	const messagesEndRef = useRef(null);
 	const textareaRef = useRef(null);
 
-	const channelName = "lildjeyy1"; // user?.broadcaster_username;
-	const parentDomain = "localhost"; // || "castaccord.com";
+	const channelName = user?.broadcaster_username;
+	const parentDomain = "castaccord.com";
 
 	const availableBots = useMemo(() => {
 		const list = Array.isArray(botAccounts) ? botAccounts : [];
