@@ -1,16 +1,16 @@
 {
-    "header": {
-      "title": "Castaccord",
-      "connectTwitch": "Подключить Twitch",
-      "importTokens": "Импортировать токены",
-      "chat": "Чат",
-      "login": "Вход",
-      "botsList": "Список ботов"
-    },
-    "pagination": {
-        "prev": "Предыдущая",
-        "next": "Следующая",
-        "page": "Страница",
-        "of": "из"
-    }
+  "header": {
+    "title": "Castaccord",
+    "connectTwitch": "Подключить Twitch",
+    "importTokens": "Импорт токенов",
+    "chat": "Чат",
+    "login": "Вход",
+    "botsList": "Список токенов"
+  },
+  "pagination": {
+    "prev": "Назад",
+    "next": "Вперёд",
+    "page": "Страница",
+    "of": "из"
+  }
 }

@@ -10,11 +10,13 @@
 		align-items: center;
 		justify-content: space-between;
 		margin-bottom: 8px;
+		position: relative;
 
 		.chat-composer-left {
 			display: flex;
 			align-items: center;
 			flex-wrap: wrap;
+			flex: 1;
 
 			.chat-composer-bot {
 				margin-right: 8px;
@@ -39,9 +41,42 @@
 			}
 		}
 
+		.chat-composer-timer {
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			background-color: rgba(239, 68, 68, 0.9);
+			padding: 6px 12px;
+			border-radius: 6px;
+			backdrop-filter: blur(10px);
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+			.chat-composer-timer-label {
+				color: $text-white-color;
+				font-size: 12px;
+				font-weight: 700;
+				font-family: JuraBold, sans-serif;
+				letter-spacing: 0.5px;
+				text-transform: uppercase;
+			}
+
+			.chat-composer-timer-value {
+				color: $text-white-color;
+				font-size: 14px;
+				font-weight: 600;
+				font-family: JuraSemiBold, sans-serif;
+				font-variant-numeric: tabular-nums;
+			}
+		}
+
 		.chat-composer-right {
 			display: flex;
 			align-items: center;
+			flex: 1;
+			justify-content: flex-end;
 
 			.chat-composer-mode {
 				margin-right: 8px;

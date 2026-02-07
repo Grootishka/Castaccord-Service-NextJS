@@ -1,9 +1,10 @@
 {
     "content": {
-        "title": "Вхід",
-        "description": "Використовуйте вашу електронну пошту і пароль для входу",
-        "emailPlaceholder": "Електронна пошта",
-        "passwordPlaceholder": "Пароль",
-        "buttonText": "Вхід"
+      "title": "Вхід",
+      "description": "Увійдіть за допомогою email і пароля",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Пароль",
+      "buttonText": "Увійти"
     }
-}
+  }
+  

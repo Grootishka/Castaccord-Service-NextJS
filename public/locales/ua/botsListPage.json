@@ -1,50 +1,51 @@
 {
-	"title": "Список ботів",
-	"searchPlaceholder": "Пошук за ім'ям, ID або статусом...",
+	"title": "Список токенів",
+	"searchPlaceholder": "Пошук за іменем користувача, ID або статусом...",
 	"tableHeaders": {
-		"icon": "Значок",
-		"username": "Ім'я користувача",
-		"color": "Колір",
-		"status": "Статус",
-		"actions": "Дії"
+	  "icon": "Іконка",
+	  "username": "Ім’я користувача",
+	  "color": "Колір",
+	  "status": "Статус",
+	  "actions": "Дії"
 	},
 	"status": {
-		"active": "активний",
-		"banned": "заблокований",
-		"invalid": "недійсний",
-		"pending": "в обробці"
+	  "active": "активний",
+	  "banned": "заблокований",
+	  "invalid": "недійсний",
+	  "pending": "в очікуванні"
 	},
 	"actions": {
-		"edit": "Редагувати",
-		"delete": "Видалити"
+	  "edit": "Редагувати",
+	  "delete": "Видалити"
 	},
-	"empty": "Ботів не знайдено",
+	"empty": "Токенів не знайдено",
 	"footer": {
-		"totalWithCount": "Всього: {{count}} бот",
-		"totalWithCountPlural": "Всього: {{count}} ботів",
-		"totalActive": "Всього активних ботів: {{count}}",
-		"totalActivePlural": "Всього активних ботів: {{count}}",
-		"totalBanned": "Всього заблокованих ботів: {{count}}",
-		"totalBannedPlural": "Всього заблокованих ботів: {{count}}",
-		"totalInvalid": "Всього недійсних ботів: {{count}}",
-		"totalInvalidPlural": "Всього недійсних ботів: {{count}}",
-		"totalPending": "Всього ботів в обробці: {{count}}",
-		"totalPendingPlural": "Всього ботів в обробці: {{count}}"
+	  "totalWithCount": "Усього: {{count}} токен",
+	  "totalWithCountPlural": "Усього: {{count}} токенів",
+	  "totalActive": "Активних токенів: {{count}}",
+	  "totalActivePlural": "Активних токенів: {{count}}",
+	  "totalBanned": "Заблокованих токенів: {{count}}",
+	  "totalBannedPlural": "Заблокованих токенів: {{count}}",
+	  "totalInvalid": "Недійсних токенів: {{count}}",
+	  "totalInvalidPlural": "Недійсних токенів: {{count}}",
+	  "totalPending": "Токенів в очікуванні: {{count}}",
+	  "totalPendingPlural": "Токенів в очікуванні: {{count}}"
 	},
 	"messages": {
-		"updateError": "Не вдалося оновити бота"
+	  "updateError": "Не вдалося оновити токен"
 	},
 	"editModal": {
-		"title": "Редагувати бота",
-		"icon": "Значок",
-		"color": "Колір",
-		"save": "Зберегти",
-		"saving": "Збереження...",
-		"cancel": "Скасувати"
+	  "title": "Редагування токена",
+	  "icon": "Іконка",
+	  "color": "Колір",
+	  "save": "Зберегти",
+	  "saving": "Збереження...",
+	  "cancel": "Скасувати"
 	},
-	"botFallbackName": "Бот #{{id}}",
+	"botFallbackName": "Токен №{{id}}",
 	"warning": {
-		"title": "Важливо",
-		"message": "Після збереження зміни можуть застосуватися не одразу — зазвичай 5–15 секунд."
+	  "title": "Важливо",
+	  "message": "Після збереження зміни можуть застосуватися не одразу — зазвичай протягом 5–15 секунд."
 	}
-}
+  }
+  

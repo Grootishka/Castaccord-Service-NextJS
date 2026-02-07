@@ -1,16 +1,16 @@
 {
-    "header": {
-      "title": "Castaccord",
-      "connectTwitch": "Підключити Twitch",
-      "importTokens": "Імпортувати токену",
-      "chat": "Чат",
-      "login": "Вхід",
-      "botsList": "Список ботів"
+  "header": {
+    "title": "Castaccord",
+    "connectTwitch": "Підключити Twitch",
+    "importTokens": "Імпорт токенів",
+    "chat": "Чат",
+    "login": "Вхід",
+    "botsList": "Список токенів"
   },
   "pagination": {
-      "prev": "Попередня",
-      "next": "Наступна",
-      "page": "Сторінка",
-      "of": "з"
+    "prev": "Назад",
+    "next": "Далі",
+    "page": "Сторінка",
+    "of": "з"
   }
 }

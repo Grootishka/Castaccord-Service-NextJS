@@ -1,15 +1,16 @@
 {
     "content": {
-        "title": "Импорт токенов",
-        "description": "Импортируйте токены ботов для включения функционала чата",
-        "noticationIfNotConnectedTwitch": "Для импорта токенов вам необходимо подключить ваш Twitch аккаунт",
-        "connectTwitch": "Подключить Twitch",
-        "botAccountTokensTitle": "Токены ботов",
-        "botAccountTokensDescription": "Вставьте токены ваших ботов ниже (один токен на строку)",
-        "importTokensButton": "Импортировать / Создать ботов",
-        "tokensCardTitle": "Токены ботов",
-        "tokensCardSubtitle": "Вставьте токены ваших ботов ниже (один токен на строку)",
-        "buttonText": "Импортировать / Создать ботов",
-        "importingText": "Импортирование..."
+      "title": "Импорт токенов",
+      "description": "Импортируйте токены аккаунтов, чтобы включить работу чата",
+      "noticationIfNotConnectedTwitch": "Перед импортом токенов нужно подключить аккаунт Twitch",
+      "connectTwitch": "Подключить Twitch",
+      "botAccountTokensTitle": "Токены аккаунтов",
+      "botAccountTokensDescription": "Вставьте токены аккаунтов ниже (по одному в строке)",
+      "importTokensButton": "Импортировать / создать аккаунты",
+      "tokensCardTitle": "Токены аккаунтов",
+      "tokensCardSubtitle": "Вставьте токены аккаунтов ниже (по одному в строке)",
+      "buttonText": "Импортировать / создать аккаунты",
+      "importingText": "Импорт..."
     }
-}
+  }
+  

@@ -101,7 +101,7 @@ const PreparedMessages = ({ setMessage, textareaRef, onSendPreparedMessage }) =>
 			{!isLoading && (
 				<div className="prepared-messages-collections">
 					{collections.map((collection) => (
-						<button key={collection.id} type="button" className="prepared-message-collection" onClick={() => handleCollectionClick(collection.id)}>
+						<button key={collection.id} type="button" className={`prepared-message-collection ${isEditMode ? "prepared-message-collection-edit-mode" : ""}`} onClick={() => handleCollectionClick(collection.id)}>
 							<span className="prepared-message-collection-title">{collection.attributes?.title || ""}</span>
 						</button>
 					))}

@@ -18,31 +18,31 @@
 		"edit": "Edit",
 		"delete": "Delete"
 	},
-	"empty": "No bots found",
+	"empty": "No tokens found",
 	"footer": {
-		"totalWithCount": "Total: {{count}} bot",
-		"totalWithCountPlural": "Total: {{count}} bots",
-		"totalActive": "Total active bots: {{count}}",
-		"totalActivePlural": "Total active bots: {{count}}",
-		"totalBanned": "Total banned bots: {{count}}",
-		"totalBannedPlural": "Total banned bots: {{count}}",
-		"totalInvalid": "Total invalid bots: {{count}}",
-		"totalInvalidPlural": "Total invalid bots: {{count}}",
-		"totalPending": "Total pending bots: {{count}}",
-		"totalPendingPlural": "Total pending bots: {{count}}"
+		"totalWithCount": "Total: {{count}} token",
+		"totalWithCountPlural": "Total: {{count}} tokens",
+		"totalActive": "Total active tokens: {{count}}",
+		"totalActivePlural": "Total active tokens: {{count}}",
+		"totalBanned": "Total banned tokens: {{count}}",
+		"totalBannedPlural": "Total banned tokens: {{count}}",
+		"totalInvalid": "Total invalid tokens: {{count}}",
+		"totalInvalidPlural": "Total invalid tokens: {{count}}",
+		"totalPending": "Total pending tokens: {{count}}",
+		"totalPendingPlural": "Total pending tokens: {{count}}"
 	},
 	"messages": {
-		"updateError": "Failed to update bot"
+		"updateError": "Failed to update token"
 	},
 	"editModal": {
-		"title": "Edit Bot",
+		"title": "Edit Token",
 		"icon": "Icon",
 		"color": "Color",
 		"save": "Save",
 		"saving": "Saving...",
 		"cancel": "Cancel"
 	},
-	"botFallbackName": "Bot #{{id}}",
+	"botFallbackName": "Token #{{id}}",
 	"warning": {
 		"title": "Important",
 		"message": "After saving, changes may not apply instantly — usually within 5–15 seconds."
